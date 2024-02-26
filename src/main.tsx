@@ -18,6 +18,14 @@ import Personal from "./customer/add/personal/page.tsx";
 
 const router = createBrowserRouter([
 	{
+		path: "/login",
+		element: <Login />,
+	},
+	{
+		path: "/register",
+		element: <Register />,
+	},
+	{
 		path: "/",
 		element: <App />,
 		children: [
@@ -61,14 +69,6 @@ const router = createBrowserRouter([
 			},
 		],
 		//  loader: check if user is logged in --- if not 'redirect'
-	},
-	{
-		path: "login",
-		element: <Login />,
-	},
-	{
-		path: "register",
-		element: <Register />,
 	},
 ]);
 
