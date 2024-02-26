@@ -59,18 +59,18 @@ const router = createBrowserRouter([
 				path: "/customer-management/add/personal",
 				element: <Personal />,
 			},
-			// Public
-			{
-				path: "/login",
-				element: <Login />,
-			},
-			{
-				path: "/register",
-				element: <Register />,
-			},
 		],
 
 		//  loader: check if user is logged in --- if not 'redirect'
+	},
+	// Public
+	{
+		path: "/login",
+		element: <Login />,
+	},
+	{
+		path: "/register",
+		element: <Register />,
 	},
 ]);
 
