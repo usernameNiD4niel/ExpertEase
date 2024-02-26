@@ -44,6 +44,13 @@ const navigationText: NavigationMenu[] = [
 		link: "/account",
 		tab: AvailableTabs.Account,
 	},
+
+	// Delete this after
+	{
+		label: "Login",
+		link: "/login",
+		tab: AvailableTabs.Account,
+	},
 ];
 
 export default navigationText;
