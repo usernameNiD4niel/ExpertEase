@@ -17,6 +17,7 @@ import CustomerList from "./customer/list/page.tsx";
 import Personal from "./customer/add/personal/page.tsx";
 
 const router = createBrowserRouter([
+	// Public
 	{
 		path: "/login",
 		element: <Login />,
