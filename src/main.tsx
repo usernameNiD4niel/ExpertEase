@@ -63,11 +63,11 @@ const router = createBrowserRouter([
 		//  loader: check if user is logged in --- if not 'redirect'
 	},
 	{
-		path: "/login",
+		path: "login",
 		element: <Login />,
 	},
 	{
-		path: "/register",
+		path: "register",
 		element: <Register />,
 	},
 ]);
