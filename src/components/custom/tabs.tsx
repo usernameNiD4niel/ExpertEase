@@ -1,5 +1,3 @@
-"use client";
-
 import { POSTab } from "@/constants/enums";
 import { usePOSTab } from "@/hooks";
 import { cn } from "@/lib/utils";

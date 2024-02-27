@@ -1,5 +1,3 @@
-"use client";
-
 import { CustomerTabs } from "@/constants/enums";
 import { useCustomerTab } from "@/hooks";
 import { cn } from "@/lib/utils";

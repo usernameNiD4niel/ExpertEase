@@ -1,5 +1,5 @@
-import NakaTindog from "@/../public/professional.jpg";
-import Logo from "@/../public/expert-ease-logo.svg";
+import NakaTindog from "/professional.jpg";
+import Logo from "/expert-ease-logo.svg";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
