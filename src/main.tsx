@@ -10,8 +10,8 @@ import {
 } from "react-router-dom";
 import Login from "./authentication/login/page.tsx";
 import Register from "./authentication/register/page.tsx";
-import ThemeProvider from "@/components/provider/theme-provider.tsx";
-import { Toaster } from "./components/ui/sonner";
+// import ThemeProvider from "@/components/provider/theme-provider.tsx";
+// import { Toaster } from "./components/ui/sonner";
 import Analytics from "./analytics/page.tsx";
 // import PointOfSalePage from "./point-of-sale/page.tsx";
 // import Services from "./point-of-sale/services/page.tsx";
@@ -146,9 +146,9 @@ const router = createBrowserRouter(
 
 createRoot(document.getElementById("root")!).render(
 	<React.StrictMode>
-		<ThemeProvider defaultTheme="system" storageKey="vite-ui-theme">
-			<RouterProvider router={router} />
+		<RouterProvider router={router} />
+		{/* <ThemeProvider defaultTheme="system" storageKey="vite-ui-theme">
 			<Toaster />
-		</ThemeProvider>
+		</ThemeProvider> */}
 	</React.StrictMode>,
 );
