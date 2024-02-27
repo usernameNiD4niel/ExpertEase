@@ -1,36 +1,34 @@
+import MyDatePicker from "@/components/custom/my-date-picker";
 import MyInput from "@/components/custom/my-input";
 import MySelect from "@/components/custom/my-select";
 import { items } from "@/constants/objects";
-import { useCallback, useEffect, useRef, useState } from "react";
-import { FaCalendarAlt } from "react-icons/fa";
+import { useEffect, useState } from "react";
 
 export default function PersonalDetailsOne() {
-	const birthdateRef = useRef<HTMLInputElement>(null);
-
 	const [firstName, setFirstName] = useState("");
 	const [lastName, setLastName] = useState("");
 	const [middleName, setMiddleName] = useState("");
-	const [birthdate, setBirthdate] = useState("");
+	const [birthdate, setBirthdate] = useState<Date | undefined>(undefined);
 	const [gender, setGender] = useState("");
 
 	useEffect(() => {
 		const firstName = localStorage.getItem("firstName") ?? "";
 		const lastName = localStorage.getItem("lastName") ?? "";
 		const middleName = localStorage.getItem("middleName") ?? "";
-		const birthdate = localStorage.getItem("birthdate") ?? "";
+		const birthDate = localStorage.getItem("birthdate");
 		const gender = localStorage.getItem("gender") ?? "";
+
+		if (birthDate) {
+			const birthdate = birthDate as unknown as Date;
+			setBirthdate(birthdate);
+		}
 
 		setFirstName(firstName);
 		setLastName(lastName);
 		setGender(gender);
 		setBirthdate(birthdate);
 		setMiddleName(middleName);
-	}, []);
-
-	const calendarHandler = useCallback(() => {
-		if (birthdateRef.current) {
-			birthdateRef.current.showPicker();
-		}
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 
 	return (
@@ -53,7 +51,7 @@ export default function PersonalDetailsOne() {
 				required
 				defaultValue={middleName}
 			/>
-			<div className="relative w-full">
+			{/* <div className="relative w-full">
 				<MyInput
 					name="birthdate"
 					placeholder="Birth Date"
@@ -66,7 +64,12 @@ export default function PersonalDetailsOne() {
 					className="absolute right-[.85rem] hidden dark:flex hover:cursor-pointer text-sm top-[.90rem] text-slate-700 dark:text-slate-300"
 					onClick={calendarHandler}
 				/>
-			</div>
+			</div> */}
+			<MyDatePicker
+				date={birthdate}
+				placeholder="Birthdate"
+				setDate={setBirthdate}
+			/>
 			<MySelect
 				items={items}
 				name="gender"

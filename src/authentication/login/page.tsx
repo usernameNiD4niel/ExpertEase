@@ -5,6 +5,10 @@ import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 
 export default function Login() {
+	if (localStorage.length > 0) {
+		localStorage.clear();
+	}
+
 	return (
 		<div className="h-screen flex items-center justify-center">
 			<div className="flex w-full md:w-auto drop-shadow-lg h-screen md:h-fit md:rounded-lg items-center justify-center bg-[#284B63] dark:bg-[#284B63]/20">
