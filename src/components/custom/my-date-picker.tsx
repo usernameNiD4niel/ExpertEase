@@ -25,11 +25,19 @@ const MyDatePicker = React.memo(
 					<Button
 						variant={"outline"}
 						className={cn(
-							"w-full justify-between text-left font-normal",
-							!date && "text-muted-foreground",
+							"dark:bg-transparent border-slate-400 py-6 w-full font-normal",
+							// !date && "text-muted-foreground",
 						)}>
-						{date ? format(date, "PPP") : <span>{placeholder}</span>}
-						<CalendarIcon className="mr-2 h-4 w-4" />
+						{date ? (
+							<span className="w-full text-start flex items-center justify-between">
+								{format(date, "PPP")}
+								<CalendarIcon className="w-3 h-3" />
+							</span>
+						) : (
+							<span className="w-full text-start flex items-center justify-between">
+								{placeholder} <CalendarIcon className="w-3 h-3" />
+							</span>
+						)}
 					</Button>
 				</PopoverTrigger>
 				<PopoverContent className="w-auto p-0">
