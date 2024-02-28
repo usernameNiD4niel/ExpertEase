@@ -1,7 +1,7 @@
 import { Outlet, useLocation } from "react-router-dom";
 import NextMenu from "./components/menu/next-menu";
 import WebMenu from "./components/menu/web-menu";
-import ExpertEase from "/expert-ease-logo.svg";
+import ExpertEase from "@/public/expert-ease-logo.svg";
 
 function App() {
 	const location = useLocation();
