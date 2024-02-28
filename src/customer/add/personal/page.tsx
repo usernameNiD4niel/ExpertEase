@@ -13,12 +13,14 @@ export default function Personal() {
 				<form className="flex gap-4 flex-col p-4 my-16 w-full max-w-4xl">
 					<h3>Personal Details</h3>
 					<PersonalDetails />
-					<hr className="my-10" />
+					<hr className="my-8" />
 					<h3>Contact Information</h3>
 					<ContactInformation />
 					<div className="w-full flex justify-end items-center">
-						<Button className="w-full md:w-fit" size={"lg"}>
-							CREATE CUSTOMER PROFILE
+						<Button
+							className="w-full md:w-fit bg-[#284B63] dark:bg-[#0A1526] text-white"
+							size={"lg"}>
+							Create Customer Profile
 						</Button>
 					</div>
 				</form>
