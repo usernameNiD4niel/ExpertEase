@@ -15,6 +15,7 @@ import CustomerPage from "./customer/page.tsx";
 import AddCustomer from "./customer/add/page.tsx";
 import CustomerList from "./customer/list/page.tsx";
 import Personal from "./customer/add/personal/page.tsx";
+import CustomerDetailsItems from "./customer/customer-details/customer-details-items.tsx";
 
 const router = createBrowserRouter([
 	{
@@ -58,6 +59,10 @@ const router = createBrowserRouter([
 			{
 				path: "/customer-management/add/personal",
 				element: <Personal />,
+			},
+			{
+				path: "/customer-management/list/:customerId",
+				element: <CustomerDetailsItems />,
 			},
 		],
 

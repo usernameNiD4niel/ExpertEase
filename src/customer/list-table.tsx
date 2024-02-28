@@ -12,6 +12,7 @@ import {
 	getCoreRowModel,
 	useReactTable,
 } from "@tanstack/react-table";
+import { useNavigate } from "react-router-dom";
 
 interface ListTableProps<TData, TValue> {
 	columns: ColumnDef<TData, TValue>[];
@@ -22,11 +23,17 @@ export default function ListTable<TData, TValue>({
 	columns,
 	data,
 }: ListTableProps<TData, TValue>) {
+	const router = useNavigate();
+
 	const table = useReactTable({
 		data,
 		columns,
 		getCoreRowModel: getCoreRowModel(),
 	});
+
+	function handleNavigation() {
+		router("/customer-management/list/1");
+	}
 
 	return (
 		<div className="rounded-md border">
@@ -55,7 +62,9 @@ export default function ListTable<TData, TValue>({
 						table.getRowModel().rows.map((row) => (
 							<TableRow
 								key={row.id}
-								data-state={row.getIsSelected() && "selected"}>
+								data-state={row.getIsSelected() && "selected"}
+								onClick={handleNavigation}
+								className="cursor-pointer">
 								{row.getVisibleCells().map((cell) => (
 									<TableCell key={cell.id}>
 										{flexRender(cell.column.columnDef.cell, cell.getContext())}

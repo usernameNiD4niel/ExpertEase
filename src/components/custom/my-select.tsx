@@ -13,6 +13,7 @@ interface MySelectProps {
 	name: string;
 	width?: string;
 	isRequired: boolean;
+	isDisabled?: boolean;
 	placeholder: string;
 	items: SelectType[];
 	defaultValue?: string;
@@ -26,6 +27,7 @@ const MySelect = memo(
 		placeholder,
 		defaultValue,
 		width,
+		isDisabled,
 	}: MySelectProps) => {
 		return (
 			<Select name={name} required={isRequired} value={defaultValue}>
@@ -33,7 +35,8 @@ const MySelect = memo(
 					className={cn(
 						width ? width : "w-full",
 						" dark:bg-transparent dark:border border-slate-400 py-6",
-					)}>
+					)}
+					disabled={isDisabled}>
 					<SelectValue placeholder={placeholder} />
 				</SelectTrigger>
 				<SelectContent>

@@ -26,4 +26,9 @@ enum CustomerTabs {
 	"Analytics",
 }
 
-export { AvailableTabs, POSTab, CustomerTabs };
+enum CustomerItemTabs {
+	"Profile",
+	"Pets",
+}
+
+export { AvailableTabs, POSTab, CustomerTabs, CustomerItemTabs };
