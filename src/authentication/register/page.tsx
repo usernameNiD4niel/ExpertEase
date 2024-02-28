@@ -1,5 +1,5 @@
-import NakaTindog from "/professional.jpg";
-import Logo from "/expert-ease-logo.svg";
+import NakaTindog from "@/public/professional.jpg";
+import Logo from "@/public/expert-ease-logo.svg";
 import { Link } from "react-router-dom";
 import RegistrationTabs from "./registration-tabs";
 import ModeToggle from "@/components/custom/mode-toggle";
