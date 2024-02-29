@@ -1,16 +1,13 @@
 import { RegisterType } from "@/constants/types";
 
 export default async function register(registerData: RegisterType) {
-	const response = await fetch(
-		`${process.env.REACT_VITE_BACKEND_URL}/register`,
-		{
-			headers: {
-				"Content-Type": "application/json",
-			},
-			method: "POST",
-			body: JSON.stringify(registerData),
+	const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/register`, {
+		headers: {
+			"Content-Type": "application/json",
 		},
-	);
+		method: "POST",
+		body: JSON.stringify(registerData),
+	});
 
 	const data = await response.json();
 

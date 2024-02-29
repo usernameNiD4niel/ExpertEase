@@ -2,7 +2,7 @@ import { AddCustomerType } from "@/constants/types";
 
 export default async function postCustomer(customerData: AddCustomerType) {
 	const response = await fetch(
-		`${process.env.REACT_VITE_BACKEND_URL}/api/customer/add`,
+		`${import.meta.env.VITE_BACKEND_URL}/api/customer/add`,
 		{
 			headers: {
 				"Content-Type": "application/json",

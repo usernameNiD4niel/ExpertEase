@@ -17,6 +17,8 @@ import CustomerList from "./customer/list/page.tsx";
 import Personal from "./customer/add/personal/page.tsx";
 import CustomerDetailsItems from "./customer/customer-details/customer-details-items.tsx";
 
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+
 const router = createBrowserRouter([
 	{
 		path: "/",
@@ -79,10 +81,14 @@ const router = createBrowserRouter([
 	},
 ]);
 
+const queryClient = new QueryClient();
+
 createRoot(document.getElementById("root")!).render(
 	<React.StrictMode>
 		<ThemeProvider defaultTheme="system" storageKey="vite-ui-theme">
-			<RouterProvider router={router} />
+			<QueryClientProvider client={queryClient}>
+				<RouterProvider router={router} />
+			</QueryClientProvider>
 			<Toaster />
 		</ThemeProvider>
 	</React.StrictMode>,
