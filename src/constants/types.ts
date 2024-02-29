@@ -40,3 +40,45 @@ export type ListTableType = {
 	location: string;
 	mobileNumber: string;
 };
+
+export type RegisterType = {
+	lastName: string;
+	firstName: string;
+	middleName: string;
+	birthDate: string;
+	gender: string;
+	province: string;
+	city: string;
+	brgy: string;
+	email: string;
+	pin: string;
+	recoveryQuestion: string;
+	recoveryAnswer: string;
+	businessName: string;
+	map: string;
+};
+
+export type LoginType = {
+	mobileNumber: string;
+	pin: string;
+};
+
+export type CustomerInformationType = {
+	firstName: string;
+	lastName: string;
+	middleInitial: string;
+	birthday: string;
+	gender: string;
+};
+
+export type ContactInformationType = {
+	province: string;
+	municipality: string;
+	barangay: string;
+	mobileNumber: string;
+};
+
+export type AddCustomerType = {
+	customerInformation: CustomerInformationType;
+	contactInformation: ContactInformationType;
+};
