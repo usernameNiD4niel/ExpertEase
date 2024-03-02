@@ -17,6 +17,7 @@ interface MySelectProps {
 	placeholder: string;
 	items: SelectType[];
 	defaultValue?: string;
+	onValueChange?: (value: string) => void;
 }
 
 const MySelect = memo(
@@ -28,9 +29,14 @@ const MySelect = memo(
 		defaultValue,
 		width,
 		isDisabled,
+		onValueChange,
 	}: MySelectProps) => {
 		return (
-			<Select name={name} required={isRequired} value={defaultValue}>
+			<Select
+				name={name}
+				required={isRequired}
+				value={defaultValue}
+				onValueChange={onValueChange}>
 				<SelectTrigger
 					className={cn(
 						width ? width : "w-full",

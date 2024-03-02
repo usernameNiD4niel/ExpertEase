@@ -1,79 +1,80 @@
+import MyDatePicker from "@/components/custom/my-date-picker";
 import MyInput from "@/components/custom/my-input";
-import { useCallback, useEffect, useRef, useState } from "react";
-import { FaCalendarAlt } from "react-icons/fa";
+import React, { memo } from "react";
 
-export default function AccountDetails() {
-	const recoveryAnswerRef = useRef<HTMLInputElement>(null);
+interface AccountDetailsProps {
+	mobileNumber: string;
+	pin: string;
+	confirmPin: string;
+	recoveryQuestion: string;
+	recoveryAnswer: Date | undefined;
 
-	const [mobileNumber, setMobileNumber] = useState("");
-	const [pin, setPin] = useState("");
-	const [confirmPin, setConfirmPin] = useState("");
-	const [recoveryQuestion, setRecoveryQuestion] = useState("");
-	const [recoveryAnswer, setRecoveryAnswer] = useState("");
+	setMobileNumber: React.Dispatch<React.SetStateAction<string>>;
+	setPin: React.Dispatch<React.SetStateAction<string>>;
+	setConfirmPin: React.Dispatch<React.SetStateAction<string>>;
+	setRecoveryQuestion: React.Dispatch<React.SetStateAction<string>>;
+	setRecoveryAnswer: React.Dispatch<React.SetStateAction<Date | undefined>>;
+}
 
-	useEffect(() => {
-		const mobileNumber = localStorage.getItem("mobileNumber") ?? "";
-		const pin = localStorage.getItem("pin") ?? "";
-		const confirmPin = localStorage.getItem("confirmPin") ?? "";
-		const recoveryQuestion = localStorage.getItem("recoveryQuestion") ?? "";
-		const recoveryAnswer = localStorage.getItem("recoveryAnswer") ?? "";
-
-		setMobileNumber(mobileNumber);
-		setPin(pin);
-		setConfirmPin(confirmPin);
-		setRecoveryAnswer(recoveryAnswer);
-		setRecoveryQuestion(recoveryQuestion);
-	}, []);
-
-	const calendarHandler = useCallback(() => {
-		if (recoveryAnswerRef.current) {
-			recoveryAnswerRef.current.showPicker();
-		}
-	}, []);
-
-	return (
-		<div className="flex w-full flex-col gap-2">
-			<MyInput
-				name="mobileNumber"
-				placeholder="Mobile Number"
-				type="number"
-				required
-				defaultValue={mobileNumber}
-			/>
-			<MyInput
-				name="pin"
-				placeholder="4 Digit Pin"
-				required
-				type="password"
-				defaultValue={pin}
-			/>
-			<MyInput
-				name="confirmPin"
-				placeholder="Confirm Pin"
-				required
-				type="password"
-				defaultValue={confirmPin}
-			/>
-			<MyInput
-				name="recoveryQuestion"
-				placeholder="Recovery Question"
-				defaultValue={recoveryQuestion}
-				required
-			/>
-			<div className="relative w-full">
+const AccountDetails = memo(
+	({
+		confirmPin,
+		mobileNumber,
+		pin,
+		recoveryAnswer,
+		recoveryQuestion,
+		setConfirmPin,
+		setMobileNumber,
+		setPin,
+		setRecoveryAnswer,
+		setRecoveryQuestion,
+	}: AccountDetailsProps) => {
+		return (
+			<div className="flex w-full flex-col gap-2">
 				<MyInput
-					name="recoveryAnswer"
-					placeholder="Recovery Answer"
-					type="date"
-					defaultValue={recoveryAnswer}
+					name="mobileNumber"
+					placeholder="Mobile Number"
+					type="number"
 					required
-					ref={recoveryAnswerRef}
+					defaultValue={mobileNumber}
+					onChange={(e) => setMobileNumber(e.target.value)}
 				/>
-				<FaCalendarAlt
-					className="absolute right-[.85rem] hidden dark:flex hover:cursor-pointer text-sm top-[.90rem] text-slate-700 dark:text-slate-300"
-					onClick={calendarHandler}
+
+				<MyInput
+					name="pin"
+					placeholder="4 Digit Pin"
+					required
+					type="password"
+					defaultValue={pin}
+					onChange={(e) => setPin(e.target.value)}
+				/>
+
+				<MyInput
+					name="confirmPin"
+					placeholder="Confirm Pin"
+					required
+					type="password"
+					defaultValue={confirmPin}
+					onChange={(e) => setConfirmPin(e.target.value)}
+				/>
+
+				<MyInput
+					name="recoveryQuestion"
+					placeholder="Recovery Question"
+					defaultValue={recoveryQuestion}
+					required
+					onChange={(e) => setRecoveryQuestion(e.target.value)}
+				/>
+
+				<MyDatePicker
+					placeholder="Recovery Answer"
+					setDate={setRecoveryAnswer}
+					date={recoveryAnswer}
+					key={"recoveryAnswerAccountDetails"}
 				/>
 			</div>
-		</div>
-	);
-}
+		);
+	},
+);
+
+export default AccountDetails;
