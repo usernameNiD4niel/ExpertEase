@@ -1,6 +1,6 @@
 import NakaTindog from "@/public/professional.jpg";
 import Logo from "@/public/expert-ease-logo.svg";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 
 import { z } from "zod";
 import { useForm } from "react-hook-form";
@@ -20,6 +20,7 @@ import { useMutation } from "@tanstack/react-query";
 import { login } from "@/endpoints";
 import { LoginType } from "@/constants/types";
 import { toast } from "sonner";
+import MyAlert from "@/components/custom/my-alert";
 
 export default function Login() {
 	if (localStorage.length > 0) {
@@ -27,6 +28,8 @@ export default function Login() {
 	}
 
 	const router = useNavigate();
+	const location = useLocation();
+	const queryParameters = new URLSearchParams(location.search);
 
 	const mutation = useMutation({
 		mutationFn: login,
@@ -54,11 +57,6 @@ export default function Login() {
 			pin: values.pin,
 		};
 
-		console.log(
-			`${JSON.stringify(values, null, 2)}: ${
-				import.meta.env.REACT_VITE_BACKEND_URL
-			}`,
-		);
 		mutation.mutate(loginData);
 	}
 
@@ -86,6 +84,13 @@ export default function Login() {
 							Business Solutions
 						</h2>
 					</div>
+					{queryParameters.get("isRegisterSuccess") &&
+						Boolean(queryParameters.get("isRegisterSuccess")) && (
+							<MyAlert
+								description="Congratulations you have successfully created an account"
+								isSuccess
+							/>
+						)}
 					<Form {...form}>
 						<form
 							onSubmit={form.handleSubmit(onSubmit)}
@@ -143,7 +148,6 @@ export default function Login() {
 							)}
 						</form>
 					</Form>
-
 					{/* <div className="w-full space-y-2" method="post">
 						<Input
 							type="number"

@@ -52,6 +52,7 @@ export type RegisterType = {
 	brgy: string;
 	email: string;
 	pin: string;
+	mobileNumber: string;
 	recoveryQuestion: string;
 	recoveryAnswer: string;
 	businessName: string;

@@ -3,23 +3,23 @@ import { SelectType } from "./types";
 const items: SelectType[] = [
 	{
 		label: "Male",
-		value: "male",
+		value: "Male",
 	},
 	{
 		label: "Female",
-		value: "female",
+		value: "Female",
 	},
 	{
 		label: "Male-LGBT",
-		value: "male-lgbt",
+		value: "Male-LGBT",
 	},
 	{
 		label: "Female-LGBT",
-		value: "female-lgbt",
+		value: "Female-LGBT",
 	},
 	{
 		label: "Prefer not to say",
-		value: "prefer not to say",
+		value: "Prefer not to say",
 	},
 ];
 

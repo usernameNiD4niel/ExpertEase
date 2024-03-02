@@ -80,6 +80,8 @@ const RegisterForm = memo(
 				confirmPin,
 				recoveryAnswer,
 				recoveryQuestion,
+				address,
+				businessName,
 			],
 		);
 
@@ -144,12 +146,8 @@ const RegisterForm = memo(
 					break;
 				default:
 					if (businessName && address) {
-						// ! create a request for account creation
-						// ! dont forget to clear the local storage after the success register
-						console.log("success!");
-
-						const newBirthdate = format(birthdate!, "MM-dd-yyyy");
-						const newRA = format(recoveryAnswer!, "MM-dd-yyyy");
+						const newBirthdate = format(birthdate!, "yyyy-MM-dd");
+						const newRA = format(recoveryAnswer!, "yyyy-MM-dd");
 
 						const registerData: RegisterType = {
 							birthDate: newBirthdate,
@@ -161,12 +159,14 @@ const RegisterForm = memo(
 							gender,
 							lastName,
 							map: address,
+							mobileNumber,
 							middleName,
 							pin,
 							province,
 							recoveryAnswer: newRA,
 							recoveryQuestion,
 						};
+
 						mutatation.mutate(registerData);
 					} else {
 						displayError();
@@ -258,9 +258,11 @@ const RegisterForm = memo(
 					/>
 				</TabsContent>
 				{mutatation.isPending ? (
-					<Button disabled type="button">
-						Loading...
-					</Button>
+					<div className="w-full flex justify-end">
+						<Button disabled type="button">
+							Loading...
+						</Button>
+					</div>
 				) : (
 					displayButtons
 				)}

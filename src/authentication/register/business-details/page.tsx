@@ -16,6 +16,8 @@ const BusinessDetails = memo(
 		setAddress,
 		setBusinessName,
 	}: BusinessDetailsProps) => {
+		console.log(`business name ::: ${businessName}`);
+		console.log(`address ::: ${address}`);
 		return (
 			<div className="flex w-full flex-col gap-2">
 				<MyInput

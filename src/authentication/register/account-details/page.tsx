@@ -46,6 +46,9 @@ const AccountDetails = memo(
 					required
 					type="password"
 					defaultValue={pin}
+					pattern="[0-9]{4}"
+					inputMode="numeric"
+					title="Pin must be 4 digit numbers"
 					onChange={(e) => setPin(e.target.value)}
 				/>
 
