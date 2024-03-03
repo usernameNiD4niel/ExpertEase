@@ -75,11 +75,11 @@ export type CustomerInformationType = {
 export type ContactInformationType = {
 	province: string;
 	municipality: string;
-	barangay: string;
+	brgy: string;
 	mobileNumber: string;
 };
 
 export type AddCustomerType = {
 	customerInformation: CustomerInformationType;
-	contactInformation: ContactInformationType;
+	contactInformation: ContactInformationType[];
 };

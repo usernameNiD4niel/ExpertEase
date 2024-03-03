@@ -21,13 +21,6 @@ export default function PersonalDetails() {
 			<MyInput name="lastName" placeholder="Last Name" />
 			<MyInput name="firstName" placeholder="First Name" />
 			<MyInput name="middleInitial" placeholder="Middle Initial" />
-			{/* <div className="relative w-full -z-10">
-				<MyInput name="birthdate" type="date" required ref={birthdateRef} />
-				<FaCalendarAlt
-					className="absolute right-[.85rem] hidden dark:flex hover:cursor-pointer text-sm top-[.90rem] text-slate-700 dark:text-slate-300"
-					onClick={calendarHandler}
-				/>
-			</div> */}
 			<MyDatePicker
 				date={birthdate}
 				placeholder="Birthday"
@@ -39,6 +32,12 @@ export default function PersonalDetails() {
 				placeholder="Select gender"
 				key={"CustomerPersonalDetails"}
 				isRequired={true}
+			/>
+			<input
+				name="birthday"
+				hidden
+				value={`${birthdate}`}
+				onChange={(e) => setBirthdate(e.target.value as unknown as Date)}
 			/>
 		</div>
 	);
