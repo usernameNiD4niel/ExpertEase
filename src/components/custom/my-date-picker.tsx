@@ -15,15 +15,17 @@ interface MyDatePickerProps {
 	date?: Date;
 	setDate: React.Dispatch<React.SetStateAction<Date | undefined>>;
 	placeholder: string;
+	disabled?: boolean;
 }
 
 const MyDatePicker = React.memo(
-	({ date, setDate, placeholder }: MyDatePickerProps) => {
+	({ date, setDate, placeholder, disabled }: MyDatePickerProps) => {
 		return (
 			<Popover modal>
 				<PopoverTrigger asChild>
 					<Button
 						variant={"outline"}
+						disabled={disabled}
 						className={cn(
 							"dark:bg-transparent border-slate-400 py-6 w-full font-normal",
 							// !date && "text-muted-foreground",

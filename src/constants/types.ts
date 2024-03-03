@@ -59,6 +59,7 @@ export type LoginType = {
 };
 
 export type CustomerInformationType = {
+	id?: string;
 	firstName: string;
 	lastName: string;
 	middleInitial: string;

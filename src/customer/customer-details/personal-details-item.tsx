@@ -4,13 +4,14 @@ import MySelect from "@/components/custom/my-select";
 import TabMutator from "@/components/custom/tab-mutator";
 import { AvailableTabs } from "@/constants/enums";
 import { items } from "@/constants/objects";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 
 interface PersonalDetailsProps {
 	lastName: string;
 	firstName: string;
 	middleName: string;
 	gender: string;
+	birthday: string;
 }
 
 export default function PersonalDetails({
@@ -18,6 +19,7 @@ export default function PersonalDetails({
 	gender,
 	lastName,
 	middleName,
+	birthday,
 }: PersonalDetailsProps) {
 	// const birthdateRef = useRef<HTMLInputElement>(null);
 	const [birthdate, setBirthdate] = useState<Date | undefined>(undefined);
@@ -26,6 +28,14 @@ export default function PersonalDetails({
 		() => <TabMutator currentTab={AvailableTabs["Customer Management"]} />,
 		[],
 	);
+
+	useEffect(() => {
+		if (birthday) {
+			const date = new Date(birthday);
+			setBirthdate(date);
+		}
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, []);
 
 	return (
 		<div className="space-y-4 -z-10">
@@ -48,17 +58,17 @@ export default function PersonalDetails({
 				defaultValue={middleName}
 				disabled
 			/>
-			{/* <div className="relative w-full -z-10">
-				<MyInput name="birthdate" type="date" required ref={birthdateRef} />
-				<FaCalendarAlt
-					className="absolute right-[.85rem] hidden dark:flex hover:cursor-pointer text-sm top-[.90rem] text-slate-700 dark:text-slate-300"
-					onClick={calendarHandler}
-				/>
-			</div> */}
 			<MyDatePicker
 				date={birthdate}
 				placeholder="Birthday"
 				setDate={setBirthdate}
+				disabled
+			/>
+			<input
+				name="birthday"
+				value={`${birthdate}`}
+				hidden
+				onChange={(e) => setBirthdate(e.target.value as unknown as Date)}
 			/>
 			<MySelect
 				items={items}

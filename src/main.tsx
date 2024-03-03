@@ -19,6 +19,7 @@ import CustomerDetailsItems from "./customer/customer-details/customer-details-i
 
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import getCustomers from "./endpoints/get-customers.ts";
+import getCustomer from "./endpoints/get-customer.ts";
 
 const router = createBrowserRouter([
 	{
@@ -69,6 +70,12 @@ const router = createBrowserRouter([
 			{
 				path: "/customer-management/list/:customerId",
 				element: <CustomerDetailsItems />,
+				loader: async ({ request }) => {
+					const url = request.url.split("/");
+					const customerId = url[url.length - 1];
+
+					return await getCustomer(customerId);
+				},
 			},
 		],
 

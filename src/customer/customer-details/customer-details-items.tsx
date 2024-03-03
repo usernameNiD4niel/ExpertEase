@@ -4,8 +4,12 @@ import PersonalDetails from "./personal-details-item";
 import ContactInfoItem from "./contact-info-item";
 import DeleteIcon from "@/public/delete.svg";
 import EditIcon from "@/public/edit.svg";
+import { useLoaderData } from "react-router-dom";
+import { AddCustomerType } from "@/constants/types";
 
 export default function CustomerDetailsItems() {
+	const { contactInformation, customerInformation } =
+		useLoaderData() as AddCustomerType;
 	/**
 	 * <div className="fixed top-0 left-0 w-full md:ms-[320px]">
 				<HeaderWithBack text="Add Customer - Personal" />
@@ -36,7 +40,7 @@ export default function CustomerDetailsItems() {
 				/>
 			</div>
 			<div className="w-full flex items-center justify-center">
-				<form className="flex gap-4 flex-col p-4 my-16 w-full max-w-4xl">
+				<form className="flex gap-4 flex-col p-4 my-4 md:my-16 w-full max-w-4xl">
 					<div className="w-full flex justify-between items-center">
 						<h3>Personal Details</h3>
 						<div className="flex items-center gap-4">
@@ -57,18 +61,19 @@ export default function CustomerDetailsItems() {
 						</div>
 					</div>
 					<PersonalDetails
-						firstName="Jose"
-						gender="male"
-						lastName="Rizal"
-						middleName="P"
+						firstName={customerInformation.firstName}
+						gender={customerInformation.gender}
+						lastName={customerInformation.lastName}
+						middleName={customerInformation.middleInitial}
+						birthday={customerInformation.birthday}
 					/>
 					<hr className="my-8" />
 					<h3>Contact Information</h3>
 					<ContactInfoItem
-						barangay="Pioneer"
-						mobileNumber="09154814993"
-						municipality="Mandaluyong City"
-						province="NCR"
+						barangay={contactInformation[0].brgy}
+						mobileNumber={contactInformation[0].mobileNumber}
+						municipality={contactInformation[0].municipality}
+						province={contactInformation[0].province}
 					/>
 					<div className="w-full flex justify-end items-center">
 						<Button
