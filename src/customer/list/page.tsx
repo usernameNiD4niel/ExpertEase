@@ -4,10 +4,12 @@ import { CustomerTabs } from "@/constants/enums";
 import { AddService } from "@/components/icons";
 import ListTable from "../list-table";
 import column from "../list-column";
-import dummyItem from "./dummy-items";
-import { Link } from "react-router-dom";
+import { Link, useLoaderData } from "react-router-dom";
+import { CustomersType } from "@/constants/types";
 
 export default function CustomerList() {
+	const customers = useLoaderData() as CustomersType;
+
 	return (
 		<div className="p-3 md:py-4 md:px-12 h-full">
 			<CustomerTabMutator tab={CustomerTabs.List} />
@@ -27,7 +29,7 @@ export default function CustomerList() {
 				</Link>
 			</div>
 
-			<ListTable columns={column} data={dummyItem} />
+			<ListTable columns={column} data={customers.customers} />
 		</div>
 	);
 }

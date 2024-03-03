@@ -12,6 +12,7 @@ import {
 	getCoreRowModel,
 	useReactTable,
 } from "@tanstack/react-table";
+import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
 interface ListTableProps<TData, TValue> {
@@ -31,9 +32,15 @@ export default function ListTable<TData, TValue>({
 		getCoreRowModel: getCoreRowModel(),
 	});
 
-	function handleNavigation() {
-		router("/customer-management/list/1");
+	function handleNavigation(id: string) {
+		router(`/customer-management/list/${id}`);
 	}
+
+	useEffect(() => {
+		// Hide the ID column, since we just need the value of that
+		table.getColumn("id")?.toggleVisibility(false);
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, []);
 
 	return (
 		<div className="rounded-md border">
@@ -63,7 +70,7 @@ export default function ListTable<TData, TValue>({
 							<TableRow
 								key={row.id}
 								data-state={row.getIsSelected() && "selected"}
-								onClick={handleNavigation}
+								onClick={() => handleNavigation(row.getValue("id"))}
 								className="cursor-pointer">
 								{row.getVisibleCells().map((cell) => (
 									<TableCell key={cell.id}>

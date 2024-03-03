@@ -18,6 +18,7 @@ import Personal from "./customer/add/personal/page.tsx";
 import CustomerDetailsItems from "./customer/customer-details/customer-details-items.tsx";
 
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import getCustomers from "./endpoints/get-customers.ts";
 
 const router = createBrowserRouter([
 	{
@@ -51,6 +52,9 @@ const router = createBrowserRouter([
 						path: "list",
 						index: true,
 						element: <CustomerList />,
+						loader: async () => {
+							return await getCustomers();
+						},
 					},
 				],
 			},

@@ -35,12 +35,6 @@ export type ModuleTabType = {
 	isActive: boolean;
 };
 
-export type ListTableType = {
-	name: string;
-	location: string;
-	mobileNumber: string;
-};
-
 export type RegisterType = {
 	lastName: string;
 	firstName: string;
@@ -82,4 +76,18 @@ export type ContactInformationType = {
 export type AddCustomerType = {
 	customerInformation: CustomerInformationType;
 	contactInformation: ContactInformationType[];
+};
+
+export type Customer = {
+	id: string;
+	fullName: string;
+	address: string;
+	mobileNumber: string;
+};
+
+export type CustomersType = {
+	customers: Customer[];
+	page_count: number;
+	previous_page: number | null;
+	next_page: number | null;
 };

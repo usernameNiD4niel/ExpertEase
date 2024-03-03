@@ -1,14 +1,18 @@
-import { ListTableType } from "@/constants/types";
+import { Customer } from "@/constants/types";
 import { ColumnDef } from "@tanstack/react-table";
 
-const column: ColumnDef<ListTableType>[] = [
+const column: ColumnDef<Customer>[] = [
 	{
-		accessorKey: "name",
-		header: "NAME",
+		accessorKey: "id",
+		header: "ID",
 	},
 	{
-		accessorKey: "location",
-		header: "LOCATION",
+		accessorKey: "fullName",
+		header: "FULL NAME",
+	},
+	{
+		accessorKey: "address",
+		header: "ADDRESS",
 	},
 	{
 		accessorKey: "mobileNumber",
