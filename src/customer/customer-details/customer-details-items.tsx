@@ -6,34 +6,33 @@ import DeleteIcon from "@/public/delete.svg";
 import EditIcon from "@/public/edit.svg";
 import { useLoaderData } from "react-router-dom";
 import { AddCustomerType } from "@/constants/types";
+import { useMemo, useState } from "react";
+import TabMutator from "@/components/custom/tab-mutator";
+import { AvailableTabs } from "@/constants/enums";
 
 export default function CustomerDetailsItems() {
 	const { contactInformation, customerInformation } =
 		useLoaderData() as AddCustomerType;
-	/**
-	 * <div className="fixed top-0 left-0 w-full md:ms-[320px]">
-				<HeaderWithBack text="Add Customer - Personal" />
-			</div>
-			<div className="w-full flex items-center justify-center">
-				<form className="flex gap-4 flex-col p-4 my-16 w-full max-w-4xl">
-					<h3>Personal Details</h3>
-					<PersonalDetails />
-					<hr className="my-8" />
-					<h3>Contact Information</h3>
-					<ContactInformation />
-					<div className="w-full flex justify-end items-center">
-						<Button
-							className="w-full md:w-fit bg-[#284B63] dark:bg-[#0A1526] text-white"
-							size={"lg"}>
-							Create Customer Profile
-						</Button>
-					</div>
-				</form>
-			</div>
-	 */
+
+	const [isEditable, setIsEditable] = useState(false);
+
+	function handleEdit() {
+		setIsEditable((prevState) => !prevState);
+	}
+
+	function handleDelete() {
+		// ! invoke a delete customer endpoint here...
+	}
+
+	const tabMutator = useMemo(
+		() => <TabMutator currentTab={AvailableTabs["Customer Management"]} />,
+		[],
+	);
+
 	return (
 		<>
-			<div className="fixed top-0 left-0 w-full md:ms-[320px]">
+			<div className="fixed top-0 left-0 w-full md:ms-[320px] z-50">
+				{tabMutator}
 				<HeaderWithBack
 					text="Customer Details"
 					key={"CustomerDetailsItemsHeader"}
@@ -46,7 +45,8 @@ export default function CustomerDetailsItems() {
 						<div className="flex items-center gap-4">
 							<button
 								className="flex gap-2 items-center text-red-500 dark:text-red-900"
-								type="button">
+								type="button"
+								onClick={handleDelete}>
 								<img src={DeleteIcon} alt="Delete icon" />
 								<span className="text-sm text-red-500 dark:text-red-900">
 									DELETE
@@ -54,7 +54,8 @@ export default function CustomerDetailsItems() {
 							</button>
 							<button
 								className="flex gap-2 items-center text-[#284B63]"
-								type="button">
+								type="button"
+								onClick={handleEdit}>
 								<img src={EditIcon} alt="Edit icon" />
 								<span className="text-blue-500 text-sm">EDIT</span>
 							</button>
@@ -66,6 +67,7 @@ export default function CustomerDetailsItems() {
 						lastName={customerInformation.lastName}
 						middleName={customerInformation.middleInitial}
 						birthday={customerInformation.birthday}
+						disabled={!isEditable}
 					/>
 					<hr className="my-8" />
 					<h3>Contact Information</h3>
@@ -74,13 +76,16 @@ export default function CustomerDetailsItems() {
 						mobileNumber={contactInformation[0].mobileNumber}
 						municipality={contactInformation[0].municipality}
 						province={contactInformation[0].province}
+						disabled={!isEditable}
 					/>
 					<div className="w-full flex justify-end items-center">
-						<Button
-							className="w-full md:w-fit bg-[#284B63] dark:bg-[#0A1526] text-white"
-							size={"lg"}>
-							Create Customer Profile
-						</Button>
+						{isEditable && (
+							<Button
+								className="w-full md:w-fit bg-[#284B63] dark:bg-[#0A1526] text-white"
+								size={"lg"}>
+								Update Customer Profile
+							</Button>
+						)}
 					</div>
 				</form>
 			</div>

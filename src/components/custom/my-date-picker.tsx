@@ -22,7 +22,7 @@ const MyDatePicker = React.memo(
 	({ date, setDate, placeholder, disabled }: MyDatePickerProps) => {
 		return (
 			<Popover modal>
-				<PopoverTrigger asChild>
+				<PopoverTrigger asChild disabled={disabled}>
 					<Button
 						variant={"outline"}
 						disabled={disabled}

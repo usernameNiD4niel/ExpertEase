@@ -6,6 +6,7 @@ interface ContactInfoItemProps {
 	municipality: string;
 	barangay: string;
 	mobileNumber: string;
+	disabled: boolean;
 }
 
 export default function ContactInfoItem({
@@ -13,6 +14,7 @@ export default function ContactInfoItem({
 	mobileNumber,
 	municipality,
 	province,
+	disabled,
 }: ContactInfoItemProps) {
 	return (
 		<div className="space-y-4">
@@ -20,26 +22,26 @@ export default function ContactInfoItem({
 				name="province"
 				placeholder="Province"
 				defaultValue={province}
-				disabled
+				disabled={disabled}
 			/>
 			<MyInput
 				name="municipality"
 				placeholder="Municipality"
 				defaultValue={municipality}
-				disabled
+				disabled={disabled}
 			/>
 			<MyInput
 				name="barangay"
 				placeholder="Barangay"
 				defaultValue={barangay}
-				disabled
+				disabled={disabled}
 			/>
 			<MyInput
 				name="mobileNumber"
 				placeholder="Mobile Number"
 				type="number"
 				defaultValue={mobileNumber}
-				disabled
+				disabled={disabled}
 			/>
 		</div>
 	);

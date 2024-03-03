@@ -1,10 +1,7 @@
-import MyDatePicker from "@/components/custom/my-date-picker";
 import MyInput from "@/components/custom/my-input";
 import MySelect from "@/components/custom/my-select";
-import TabMutator from "@/components/custom/tab-mutator";
-import { AvailableTabs } from "@/constants/enums";
 import { items } from "@/constants/objects";
-import { useEffect, useMemo, useState } from "react";
+import Birthday from "./birthday";
 
 interface PersonalDetailsProps {
 	lastName: string;
@@ -12,6 +9,7 @@ interface PersonalDetailsProps {
 	middleName: string;
 	gender: string;
 	birthday: string;
+	disabled: boolean;
 }
 
 export default function PersonalDetails({
@@ -20,56 +18,29 @@ export default function PersonalDetails({
 	lastName,
 	middleName,
 	birthday,
+	disabled,
 }: PersonalDetailsProps) {
-	// const birthdateRef = useRef<HTMLInputElement>(null);
-	const [birthdate, setBirthdate] = useState<Date | undefined>(undefined);
-
-	const tabMutator = useMemo(
-		() => <TabMutator currentTab={AvailableTabs["Customer Management"]} />,
-		[],
-	);
-
-	useEffect(() => {
-		if (birthday) {
-			const date = new Date(birthday);
-			setBirthdate(date);
-		}
-		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, []);
-
 	return (
-		<div className="space-y-4 -z-10">
-			{tabMutator}
+		<div className="space-y-4">
 			<MyInput
 				name="lastName"
 				placeholder="Last Name"
 				defaultValue={lastName}
-				disabled
+				disabled={disabled}
 			/>
 			<MyInput
 				name="firstName"
 				placeholder="First Name"
 				defaultValue={firstName}
-				disabled
+				disabled={disabled}
 			/>
 			<MyInput
 				name="middleInitial"
 				placeholder="Middle Initial"
 				defaultValue={middleName}
-				disabled
+				disabled={disabled}
 			/>
-			<MyDatePicker
-				date={birthdate}
-				placeholder="Birthday"
-				setDate={setBirthdate}
-				disabled
-			/>
-			<input
-				name="birthday"
-				value={`${birthdate}`}
-				hidden
-				onChange={(e) => setBirthdate(e.target.value as unknown as Date)}
-			/>
+			<Birthday birthday={birthday} disabled={disabled} />
 			<MySelect
 				items={items}
 				name="gender"
@@ -77,7 +48,7 @@ export default function PersonalDetails({
 				defaultValue={gender}
 				key={"CustomerPersonalDetails"}
 				isRequired={true}
-				isDisabled={true}
+				isDisabled={disabled}
 			/>
 		</div>
 	);
