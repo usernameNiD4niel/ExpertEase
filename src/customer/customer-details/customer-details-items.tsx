@@ -6,7 +6,7 @@ import DeleteIcon from "@/public/delete.svg";
 import EditIcon from "@/public/edit.svg";
 import { useLoaderData } from "react-router-dom";
 import { AddCustomerType } from "@/constants/types";
-import { useMemo, useState } from "react";
+import { FormEvent, useMemo, useState } from "react";
 import TabMutator from "@/components/custom/tab-mutator";
 import { AvailableTabs } from "@/constants/enums";
 
@@ -29,6 +29,16 @@ export default function CustomerDetailsItems() {
 		[],
 	);
 
+	function handleFormSubmit(event: FormEvent<HTMLFormElement>) {
+		event.preventDefault();
+
+		const formData = new FormData(event.currentTarget);
+		// Personal Details
+		const firstName = formData.get("firstName")?.toString();
+		console.log(`the first name ${firstName}`);
+		// use -> patchCustomer
+	}
+
 	return (
 		<>
 			<div className="fixed top-0 left-0 w-full md:ms-[320px] z-50">
@@ -39,7 +49,9 @@ export default function CustomerDetailsItems() {
 				/>
 			</div>
 			<div className="w-full flex items-center justify-center">
-				<form className="flex gap-4 flex-col p-4 my-4 md:my-16 w-full max-w-4xl">
+				<form
+					className="flex gap-4 flex-col p-4 my-4 md:my-16 w-full max-w-4xl"
+					onSubmit={handleFormSubmit}>
 					<div className="w-full flex justify-between items-center">
 						<h3>Personal Details</h3>
 						<div className="flex items-center gap-4">
