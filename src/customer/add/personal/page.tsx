@@ -62,14 +62,12 @@ export default function Personal() {
 				lastName,
 				middleInitial,
 			},
-			contactInformation: [
-				{
-					brgy,
-					mobileNumber,
-					municipality,
-					province,
-				},
-			],
+			contactInformation: {
+				brgy,
+				mobileNumber,
+				municipality,
+				province,
+			},
 		};
 
 		mutation.mutate(customer);

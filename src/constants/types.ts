@@ -59,7 +59,6 @@ export type LoginType = {
 };
 
 export type CustomerInformationType = {
-	id?: string;
 	firstName: string;
 	lastName: string;
 	middleInitial: string;
@@ -76,7 +75,7 @@ export type ContactInformationType = {
 
 export type AddCustomerType = {
 	customerInformation: CustomerInformationType;
-	contactInformation: ContactInformationType[];
+	contactInformation: ContactInformationType;
 };
 
 export type Customer = {

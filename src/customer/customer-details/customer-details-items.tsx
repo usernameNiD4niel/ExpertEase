@@ -4,15 +4,26 @@ import PersonalDetails from "./personal-details-item";
 import ContactInfoItem from "./contact-info-item";
 import DeleteIcon from "@/public/delete.svg";
 import EditIcon from "@/public/edit.svg";
-import { useLoaderData } from "react-router-dom";
+import { useLoaderData, useNavigate, useParams } from "react-router-dom";
 import { AddCustomerType } from "@/constants/types";
 import { FormEvent, useMemo, useState } from "react";
 import TabMutator from "@/components/custom/tab-mutator";
 import { AvailableTabs } from "@/constants/enums";
+import MyDialog from "@/components/custom/my-dialog";
+import { deleteCustomer } from "@/endpoints";
+import { displayMessage } from "@/constants/helper-function";
+
+type RouteParams = {
+	customerId: string;
+};
 
 export default function CustomerDetailsItems() {
 	const { contactInformation, customerInformation } =
 		useLoaderData() as AddCustomerType;
+
+	const router = useNavigate();
+	const { customerId } = useParams<RouteParams>();
+	console.log(`customer id ${customerId}`);
 
 	const [isEditable, setIsEditable] = useState(false);
 
@@ -20,8 +31,17 @@ export default function CustomerDetailsItems() {
 		setIsEditable((prevState) => !prevState);
 	}
 
-	function handleDelete() {
-		// ! invoke a delete customer endpoint here...
+	async function handleDelete() {
+		if (!customerId) {
+			router("-1");
+			return;
+		}
+
+		const { message, success } = await deleteCustomer(customerId);
+		if (success) {
+			router("/customer-management/list");
+		}
+		displayMessage(success, message);
 	}
 
 	const tabMutator = useMemo(
@@ -55,15 +75,22 @@ export default function CustomerDetailsItems() {
 					<div className="w-full flex justify-between items-center">
 						<h3>Personal Details</h3>
 						<div className="flex items-center gap-4">
-							<button
-								className="flex gap-2 items-center text-red-500 dark:text-red-900"
-								type="button"
-								onClick={handleDelete}>
-								<img src={DeleteIcon} alt="Delete icon" />
-								<span className="text-sm text-red-500 dark:text-red-900">
-									DELETE
-								</span>
-							</button>
+							<MyDialog
+								button={
+									<button
+										className="flex gap-2 items-center text-red-500 dark:text-red-900"
+										type="button">
+										<img src={DeleteIcon} alt="Delete icon" />
+										<span className="text-sm text-red-500 dark:text-red-900">
+											DELETE
+										</span>
+									</button>
+								}
+								action={handleDelete}
+								description="When you click continue button, the selected customer will be deleted from the database"
+								title="Are you sure you want to delete this customer?"
+							/>
+
 							<button
 								className="flex gap-2 items-center text-[#284B63]"
 								type="button"
@@ -84,10 +111,10 @@ export default function CustomerDetailsItems() {
 					<hr className="my-8" />
 					<h3>Contact Information</h3>
 					<ContactInfoItem
-						barangay={contactInformation[0].brgy}
-						mobileNumber={contactInformation[0].mobileNumber}
-						municipality={contactInformation[0].municipality}
-						province={contactInformation[0].province}
+						barangay={contactInformation.brgy}
+						mobileNumber={contactInformation.mobileNumber}
+						municipality={contactInformation.municipality}
+						province={contactInformation.province}
 						disabled={!isEditable}
 					/>
 					<div className="w-full flex justify-end items-center">
