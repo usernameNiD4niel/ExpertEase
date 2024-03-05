@@ -10,8 +10,9 @@ import { FormEvent, useMemo, useState } from "react";
 import TabMutator from "@/components/custom/tab-mutator";
 import { AvailableTabs } from "@/constants/enums";
 import MyDialog from "@/components/custom/my-dialog";
-import { deleteCustomer } from "@/endpoints";
+import { deleteCustomer, postCustomer } from "@/endpoints";
 import { displayMessage } from "@/constants/helper-function";
+import { useMutation } from "@tanstack/react-query";
 
 type RouteParams = {
 	customerId: string;
@@ -23,9 +24,18 @@ export default function CustomerDetailsItems() {
 
 	const router = useNavigate();
 	const { customerId } = useParams<RouteParams>();
-	console.log(`customer id ${customerId}`);
 
 	const [isEditable, setIsEditable] = useState(false);
+
+	const mutation = useMutation({
+		mutationFn: postCustomer,
+		onSuccess: ({ message, success }) => {
+			displayMessage(success, message);
+			if (success) {
+				router("/customer-management/list");
+			}
+		},
+	});
 
 	function handleEdit() {
 		setIsEditable((prevState) => !prevState);
@@ -55,7 +65,48 @@ export default function CustomerDetailsItems() {
 		const formData = new FormData(event.currentTarget);
 		// Personal Details
 		const firstName = formData.get("firstName")?.toString();
-		console.log(`the first name ${firstName}`);
+		const lastName = formData.get("lastName")?.toString();
+		const gender = formData.get("gender")?.toString();
+		const birthday = formData.get("birthday")?.toString();
+		const middleInitial = formData.get("middleInitial")?.toString();
+		// Customer Details
+		const brgy = formData.get("brgy")?.toString();
+		const mobileNumber = formData.get("mobileNumber")?.toString();
+		const municipality = formData.get("municipality")?.toString();
+		const province = formData.get("province")?.toString();
+
+		if (
+			!firstName ||
+			!lastName ||
+			!gender ||
+			!birthday ||
+			!middleInitial ||
+			!brgy ||
+			!mobileNumber ||
+			!municipality ||
+			!province
+		) {
+			displayMessage(false, "All fields are required");
+			return;
+		}
+
+		const customerData: AddCustomerType = {
+			contactInformation: {
+				brgy,
+				mobileNumber,
+				municipality,
+				province,
+			},
+			customerInformation: {
+				birthday,
+				firstName,
+				gender,
+				lastName,
+				middleInitial,
+			},
+		};
+
+		mutation.mutate(customerData);
 		// use -> patchCustomer
 	}
 
@@ -121,8 +172,9 @@ export default function CustomerDetailsItems() {
 						{isEditable && (
 							<Button
 								className="w-full md:w-fit bg-[#284B63] dark:bg-[#0A1526] text-white"
-								size={"lg"}>
-								Update Customer Profile
+								size={"lg"}
+								disabled={mutation.isPending}>
+								{mutation.isPending ? "Loading..." : "Update Customer Profile"}
 							</Button>
 						)}
 					</div>
