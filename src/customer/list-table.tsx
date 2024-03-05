@@ -6,13 +6,14 @@ import {
 	TableHeader,
 	TableRow,
 } from "@/components/ui/table";
+import { useWidthSize } from "@/hooks";
 import {
 	ColumnDef,
 	flexRender,
 	getCoreRowModel,
 	useReactTable,
 } from "@tanstack/react-table";
-import { useEffect } from "react";
+import { useEffect, useLayoutEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
 interface ListTableProps<TData, TValue> {
@@ -41,6 +42,20 @@ export default function ListTable<TData, TValue>({
 		table.getColumn("id")?.toggleVisibility(false);
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
+
+	const width = useWidthSize();
+
+	function handleWidthChange(width: number) {
+		if (width < 768) {
+			table.getColumn("address")?.toggleVisibility(false);
+		} else {
+			table.getColumn("address")?.toggleVisibility(true);
+		}
+	}
+	useLayoutEffect(() => {
+		setTimeout(() => handleWidthChange(width), 200);
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [width]);
 
 	return (
 		<div className="rounded-md border">

@@ -9,6 +9,14 @@ const column: ColumnDef<Customer>[] = [
 	{
 		accessorKey: "fullName",
 		header: "FULL NAME",
+		cell: ({ row }) => {
+			return (
+				<div className="ml-4 font-medium flex flex-col">
+					<span>{row.getValue("fullName")}</span>
+					<span className="md:hidden">{row.getValue("address")}</span>
+				</div>
+			);
+		},
 	},
 	{
 		accessorKey: "address",
