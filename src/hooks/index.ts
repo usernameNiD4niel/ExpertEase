@@ -4,6 +4,8 @@ import usePOSTab from "./usePOSTab";
 import useCustomerItemTab from "./useCustomerItemTab";
 import useCustomerTab from "./useCustomerTab";
 import useWidthSize from "./useWidthSize";
+import useSearchTable from "./useSearchTable";
+import useDebounce from "./useDebounce";
 
 export {
 	useNavigation,
@@ -12,4 +14,6 @@ export {
 	useCustomerTab,
 	useCustomerItemTab,
 	useWidthSize,
+	useSearchTable,
+	useDebounce,
 };

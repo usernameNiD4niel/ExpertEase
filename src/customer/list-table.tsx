@@ -6,44 +6,66 @@ import {
 	TableHeader,
 	TableRow,
 } from "@/components/ui/table";
-import { useWidthSize } from "@/hooks";
+import { Customer } from "@/constants/types";
+import { searchCustomerTable } from "@/endpoints";
+import { useDebounce, useWidthSize } from "@/hooks";
 import {
 	ColumnDef,
 	flexRender,
 	getCoreRowModel,
 	useReactTable,
 } from "@tanstack/react-table";
-import { useEffect, useLayoutEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useCallback, useEffect, useLayoutEffect, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import column from "./list-column";
+import MyInput from "@/components/custom/my-input";
+import { AddService } from "@/components/icons";
 
-interface ListTableProps<TData, TValue> {
-	columns: ColumnDef<TData, TValue>[];
-	data: TData[];
+interface ListTableProps<TValue> {
+	columns: ColumnDef<Customer, TValue>[];
+	data: Customer[];
 }
 
-export default function ListTable<TData, TValue>({
+export default function ListTable<TValue>({
 	columns,
 	data,
-}: ListTableProps<TData, TValue>) {
+}: ListTableProps<TValue>) {
 	const router = useNavigate();
+	const [search, setSearch] = useState("");
+
+	const debouncedValue = useDebounce(search);
+
+	const width = useWidthSize();
+
+	const [newData, setNewData] = useState(data);
 
 	const table = useReactTable({
-		data,
-		columns,
+		columns: column,
+		data: newData,
 		getCoreRowModel: getCoreRowModel(),
+		initialState: {
+			columnVisibility: {
+				id: false,
+			},
+		},
 	});
 
 	function handleNavigation(id: string) {
 		router(`/customer-management/list/${id}`);
 	}
 
-	useEffect(() => {
-		// Hide the ID column, since we just need the value of that
-		table.getColumn("id")?.toggleVisibility(false);
-		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, []);
+	const handleSearchRequest = useCallback(async () => {
+		const customers = await searchCustomerTable<Customer>(debouncedValue);
+		setNewData(customers);
+	}, [debouncedValue]);
 
-	const width = useWidthSize();
+	useEffect(() => {
+		if (debouncedValue) {
+			handleSearchRequest();
+		} else {
+			setNewData(data);
+		}
+	}, [debouncedValue, handleSearchRequest, data]);
 
 	function handleWidthChange(width: number) {
 		if (width < 768) {
@@ -57,52 +79,83 @@ export default function ListTable<TData, TValue>({
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [width]);
 
+	const handleOnChange = useCallback(
+		(event: React.ChangeEvent<HTMLInputElement>) => {
+			setSearch(event.target.value);
+		},
+		[],
+	);
+
 	return (
-		<div className="rounded-md border">
-			<Table>
-				<TableHeader>
-					{table.getHeaderGroups().map((headerGroup) => (
-						<TableRow key={headerGroup.id}>
-							{headerGroup.headers.map((header) => {
-								return (
-									<TableHead key={header.id}>
-										{header.isPlaceholder
-											? null
-											: flexRender(
-													header.column.columnDef.header,
-													header.getContext(),
-													// eslint-disable-next-line no-mixed-spaces-and-tabs
-											  )}
-									</TableHead>
-								);
-							})}
-						</TableRow>
-					))}
-				</TableHeader>
-				<TableBody>
-					{table.getRowModel().rows?.length ? (
-						table.getRowModel().rows.map((row) => (
-							<TableRow
-								key={row.id}
-								data-state={row.getIsSelected() && "selected"}
-								onClick={() => handleNavigation(row.getValue("id"))}
-								className="cursor-pointer">
-								{row.getVisibleCells().map((cell) => (
-									<TableCell key={cell.id}>
-										{flexRender(cell.column.columnDef.cell, cell.getContext())}
-									</TableCell>
-								))}
+		<div>
+			<div className="flex flex-col w-full justify-end items-end mb-4">
+				<MyInput
+					placeholder="Search Customer"
+					value={search}
+					onChange={handleOnChange}
+					className="w-full py-6"
+					name=""
+				/>
+				<Link
+					to={"/customer-management/add"}
+					className="p-2 bg-transparent flex items-center justify-center gap-2 text-[#284B63] dark:text-slate-400">
+					<span className="mt-[3px]">
+						<AddService />
+					</span>
+					<span className="text-sm">ADD CUSTOMER</span>
+				</Link>
+			</div>
+			<div className="rounded-md border">
+				<Table>
+					<TableHeader>
+						{table.getHeaderGroups().map((headerGroup) => (
+							<TableRow key={headerGroup.id}>
+								{headerGroup.headers.map((header) => {
+									return (
+										<TableHead key={header.id}>
+											{header.isPlaceholder
+												? null
+												: flexRender(
+														header.column.columnDef.header,
+														header.getContext(),
+														// eslint-disable-next-line no-mixed-spaces-and-tabs
+												  )}
+										</TableHead>
+									);
+								})}
 							</TableRow>
-						))
-					) : (
-						<TableRow>
-							<TableCell colSpan={columns.length} className="h-24 text-center">
-								No results.
-							</TableCell>
-						</TableRow>
-					)}
-				</TableBody>
-			</Table>
+						))}
+					</TableHeader>
+					<TableBody>
+						{table.getRowModel().rows?.length ? (
+							table.getRowModel().rows.map((row) => (
+								<TableRow
+									key={row.id}
+									data-state={row.getIsSelected() && "selected"}
+									onClick={() => handleNavigation(row.getValue("id"))}
+									className="cursor-pointer">
+									{row.getVisibleCells().map((cell) => (
+										<TableCell key={cell.id}>
+											{flexRender(
+												cell.column.columnDef.cell,
+												cell.getContext(),
+											)}
+										</TableCell>
+									))}
+								</TableRow>
+							))
+						) : (
+							<TableRow>
+								<TableCell
+									colSpan={columns.length}
+									className="h-24 text-center">
+									No results.
+								</TableCell>
+							</TableRow>
+						)}
+					</TableBody>
+				</Table>
+			</div>
 		</div>
 	);
 }

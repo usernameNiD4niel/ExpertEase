@@ -4,6 +4,7 @@ import postCustomer from "./post-customer";
 import getCustomers from "./get-customers";
 import patchCustomer from "./patch-customer";
 import deleteCustomer from "./delete-customer";
+import searchCustomerTable from "./search-customer-table";
 
 export {
 	register,
@@ -12,4 +13,5 @@ export {
 	getCustomers,
 	patchCustomer,
 	deleteCustomer,
+	searchCustomerTable,
 };
