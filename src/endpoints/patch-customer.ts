@@ -7,6 +7,7 @@ export default async function patchCustomer({
 	id: string;
 	customerPatch: AddCustomerType;
 }) {
+	console.log(`request body: ${JSON.stringify(customerPatch, null, 2)}`);
 	const response = await fetch(
 		`${import.meta.env.VITE_BACKEND_URL}/api/customer/${id}`,
 		{
