@@ -10,7 +10,7 @@ import { FormEvent, useMemo, useState } from "react";
 import TabMutator from "@/components/custom/tab-mutator";
 import { AvailableTabs } from "@/constants/enums";
 import MyDialog from "@/components/custom/my-dialog";
-import { deleteCustomer, postCustomer } from "@/endpoints";
+import { deleteCustomer, patchCustomer } from "@/endpoints";
 import { displayMessage } from "@/constants/helper-function";
 import { useMutation } from "@tanstack/react-query";
 
@@ -28,7 +28,7 @@ export default function CustomerDetailsItems() {
 	const [isEditable, setIsEditable] = useState(false);
 
 	const mutation = useMutation({
-		mutationFn: postCustomer,
+		mutationFn: patchCustomer,
 		onSuccess: ({ message, success }) => {
 			displayMessage(success, message);
 			if (success) {
@@ -106,7 +106,7 @@ export default function CustomerDetailsItems() {
 			},
 		};
 
-		mutation.mutate(customerData);
+		mutation.mutate({ id: customerId!, customerPatch: customerData });
 		// use -> patchCustomer
 	}
 

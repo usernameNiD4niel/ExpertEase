@@ -31,7 +31,7 @@ export default function ContactInfoItem({
 				disabled={disabled}
 			/>
 			<MyInput
-				name="barangay"
+				name="brgy"
 				placeholder="Barangay"
 				defaultValue={barangay}
 				disabled={disabled}

@@ -1,9 +1,12 @@
 import { AddCustomerType } from "@/constants/types";
 
-export default async function patchCustomer(
-	id: string,
-	customerPatch: AddCustomerType,
-) {
+export default async function patchCustomer({
+	id,
+	customerPatch,
+}: {
+	id: string;
+	customerPatch: AddCustomerType;
+}) {
 	const response = await fetch(
 		`${import.meta.env.VITE_BACKEND_URL}/api/customer/${id}`,
 		{
