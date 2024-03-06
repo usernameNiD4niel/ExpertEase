@@ -13,6 +13,7 @@ import MyDialog from "@/components/custom/my-dialog";
 import { deleteCustomer, patchCustomer } from "@/endpoints";
 import { displayMessage } from "@/constants/helper-function";
 import { useMutation } from "@tanstack/react-query";
+import { format } from "date-fns";
 
 type RouteParams = {
 	customerId: string;
@@ -90,6 +91,8 @@ export default function CustomerDetailsItems() {
 			return;
 		}
 
+		const formattedBDay = format(birthday, "yyyy-MM-dd");
+
 		const customerData: AddCustomerType = {
 			contactInformation: {
 				brgy,
@@ -98,7 +101,7 @@ export default function CustomerDetailsItems() {
 				province,
 			},
 			customerInformation: {
-				birthday,
+				birthday: formattedBDay,
 				firstName,
 				gender,
 				lastName,
