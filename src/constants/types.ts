@@ -91,3 +91,17 @@ export type CustomersType = {
 	previous_page: number | null;
 	next_page: number | null;
 };
+
+export type ServicesType = {
+	services: Services[];
+	page_count: number;
+	previous_page: number | null;
+	next_page: number | null;
+};
+
+export type Services = {
+	id: string;
+	service: string;
+	description: string;
+	price: string;
+};

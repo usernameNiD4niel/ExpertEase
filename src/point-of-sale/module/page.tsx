@@ -9,7 +9,7 @@ export default function Module() {
 		<section>
 			<POSTabMutator tab={POSTab.Service} />
 			<TabMutator currentTab={AvailableTabs["Point of Sale"]} />
-			<div className="w-full bg-black text-white flex gap-2">
+			<div className="w-full bg-black dark:bg-[#0A1526]/50 text-white flex gap-2">
 				{/* Tab */}
 				<Tabs />
 			</div>
