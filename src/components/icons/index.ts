@@ -8,7 +8,6 @@ import { MdOutlineBusinessCenter } from "react-icons/md";
 import { IoAddCircleOutline } from "react-icons/io5";
 import { FiShoppingCart } from "react-icons/fi";
 import { CiSearch } from "react-icons/ci";
-
 export {
 	IoMenu as MenuIcon,
 	AiOutlineUserAdd,

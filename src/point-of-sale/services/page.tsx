@@ -4,6 +4,7 @@ import TabMutator from "@/components/custom/tab-mutator";
 import ListTable from "./table-data";
 import { useQuery } from "@tanstack/react-query";
 import getServices from "@/endpoints/get-services";
+import MyCart from "@/components/custom/my-cart";
 
 export default function Services() {
 	const { data } = useQuery({
@@ -11,12 +12,14 @@ export default function Services() {
 		queryFn: getServices,
 	});
 	return (
-		<div className="p-10 pt-4">
+		<div className="p-4 md:p-10 pt-4">
 			<POSTabMutator tab={POSTab.Service} />
 			<TabMutator currentTab={AvailableTabs["Point of Sale"]} />
 
 			{/* <ServiceTable /> */}
 			<ListTable data={data?.services} />
+
+			<MyCart />
 		</div>
 	);
 }
