@@ -1,3 +1,4 @@
+import { IconType } from "react-icons/lib";
 import { AvailableTabs } from "./enums";
 
 export type Theme = "dark" | "light" | "system";
@@ -104,4 +105,10 @@ export type Services = {
 	service: string;
 	description: string;
 	price: string;
+};
+
+export type DropdownItem = {
+	text: string | JSX.Element;
+	action?: () => void;
+	Icon?: IconType;
 };
