@@ -36,10 +36,8 @@ export default function Personal() {
 		const middleInitial = formData.get("middleInitial")?.toString() ?? "";
 
 		const bday = formData.get("birthday")?.toString() ?? "";
-		console.log(`bday ${bday}`);
-		const birthday = format(bday, "yyyy-MM-dd");
 
-		console.log(`birthday ${birthday}`);
+		const birthday = format(bday, "yyyy-MM-dd");
 
 		const gender = formData.get("gender")?.toString() ?? "";
 
@@ -48,11 +46,6 @@ export default function Personal() {
 		const municipality = formData.get("municipality")?.toString() ?? "";
 		const brgy = formData.get("brgy")?.toString() ?? "";
 		const mobileNumber = formData.get("mobileNumber")?.toString() ?? "";
-
-		console.log(`province ${province}`);
-		console.log(`municipality ${municipality}`);
-		console.log(`brgy ${brgy}`);
-		console.log(`mobileNumber ${mobileNumber}`);
 
 		const customer: AddCustomerType = {
 			customerInformation: {

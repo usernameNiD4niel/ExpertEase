@@ -97,7 +97,7 @@ export default function ListTable<TValue>({
 					name=""
 				/>
 				<Link
-					to={"/customer-management/add"}
+					to={"/customer-management/add/personal"}
 					className="p-2 bg-transparent flex items-center justify-center gap-2 text-[#284B63] dark:text-slate-400">
 					<span className="mt-[3px]">
 						<AddService />

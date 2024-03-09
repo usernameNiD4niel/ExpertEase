@@ -12,7 +12,6 @@ import PointOfSalePage from "./point-of-sale/page.tsx";
 import Services from "./point-of-sale/services/page.tsx";
 import Module from "./point-of-sale/module/page.tsx";
 import CustomerPage from "./customer/page.tsx";
-import AddCustomer from "./customer/add/page.tsx";
 import CustomerList from "./customer/list/page.tsx";
 import Personal from "./customer/add/personal/page.tsx";
 import CustomerDetailsItems from "./customer/customer-details/customer-details-items.tsx";
@@ -59,10 +58,10 @@ const router = createBrowserRouter([
 					},
 				],
 			},
-			{
-				path: "/customer-management/add",
-				element: <AddCustomer />,
-			},
+			// {
+			// 	path: "/customer-management/add",
+			// 	element: <AddCustomer />,
+			// },
 			{
 				path: "/customer-management/add/personal",
 				element: <Personal />,
