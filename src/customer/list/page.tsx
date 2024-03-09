@@ -4,6 +4,7 @@ import ListTable from "../list-table";
 import column from "../list-column";
 import { useLoaderData } from "react-router-dom";
 import { CustomersType } from "@/constants/types";
+import MyAddButton from "@/components/custom/my-add-button";
 
 export default function CustomerList() {
 	const customers = useLoaderData() as CustomersType;
@@ -12,6 +13,7 @@ export default function CustomerList() {
 		<div className="p-3 md:py-4 md:px-12 h-full">
 			<CustomerTabMutator tab={CustomerTabs.List} />
 			<ListTable columns={column} data={customers.customers} />
+			<MyAddButton endpoint="/customer-management/add/personal" text="Add" />
 		</div>
 	);
 }
