@@ -3,7 +3,6 @@ import { useNavigation } from "@/hooks";
 import navigationText from "./navigation-text";
 import { useNavigate } from "react-router-dom";
 import { cn } from "@/lib/utils";
-import ModeToggle from "../custom/mode-toggle";
 
 export default function WebMenu() {
 	const [activeTab, setActiveTab] = useNavigation((state) => [
@@ -36,9 +35,6 @@ export default function WebMenu() {
 					</li>
 				))}
 			</ul>
-			<div className="absolute bottom-2 left-2">
-				<ModeToggle />
-			</div>
 		</>
 	);
 }
