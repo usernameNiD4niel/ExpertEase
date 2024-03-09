@@ -16,10 +16,10 @@ import {
 	useReactTable,
 } from "@tanstack/react-table";
 import { useCallback, useEffect, useLayoutEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import column from "./list-column";
 import MyInput from "@/components/custom/my-input";
-import { AddService } from "@/components/icons";
+// import ComboBoxResponsive from "./list/search";
 
 interface ListTableProps<TValue> {
 	columns: ColumnDef<Customer, TValue>[];
@@ -96,14 +96,7 @@ export default function ListTable<TValue>({
 					className="w-full py-6"
 					name=""
 				/>
-				<Link
-					to={"/customer-management/add/personal"}
-					className="p-2 bg-transparent flex items-center justify-center gap-2 text-[#284B63] dark:text-slate-400">
-					<span className="mt-[3px]">
-						<AddService />
-					</span>
-					<span className="text-sm">ADD CUSTOMER</span>
-				</Link>
+				{/*//! uncomment this <ComboBoxResponsive /> */}
 			</div>
 			<div className="rounded-md border">
 				<Table>

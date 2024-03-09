@@ -6,6 +6,7 @@ import useCustomerTab from "./useCustomerTab";
 import useWidthSize from "./useWidthSize";
 import useSearchTable from "./useSearchTable";
 import useDebounce from "./useDebounce";
+import useMediaQuery from "./useMediaQuery";
 
 export {
 	useNavigation,
@@ -16,4 +17,5 @@ export {
 	useWidthSize,
 	useSearchTable,
 	useDebounce,
+	useMediaQuery,
 };
