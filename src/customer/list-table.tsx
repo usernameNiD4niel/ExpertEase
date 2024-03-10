@@ -7,19 +7,17 @@ import {
 	TableRow,
 } from "@/components/ui/table";
 import { Customer } from "@/constants/types";
-import { searchCustomerTable } from "@/endpoints";
-import { useDebounce, useWidthSize } from "@/hooks";
+import { useWidthSize } from "@/hooks";
 import {
 	ColumnDef,
 	flexRender,
 	getCoreRowModel,
 	useReactTable,
 } from "@tanstack/react-table";
-import { useCallback, useEffect, useLayoutEffect, useState } from "react";
+import { useCallback, useLayoutEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import column from "./list-column";
-import MyInput from "@/components/custom/my-input";
-// import ComboBoxResponsive from "./list/search";
+import ComboBoxResponsive from "./list/search";
 
 interface ListTableProps<TValue> {
 	columns: ColumnDef<Customer, TValue>[];
@@ -31,9 +29,6 @@ export default function ListTable<TValue>({
 	data,
 }: ListTableProps<TValue>) {
 	const router = useNavigate();
-	const [search, setSearch] = useState("");
-
-	const debouncedValue = useDebounce(search);
 
 	const width = useWidthSize();
 
@@ -54,49 +49,32 @@ export default function ListTable<TValue>({
 		router(`/customer-management/list/${id}`);
 	}
 
-	const handleSearchRequest = useCallback(async () => {
-		const customers = await searchCustomerTable<Customer>(debouncedValue);
-		setNewData(customers);
-	}, [debouncedValue]);
+	const handleWidthChange = useCallback(
+		(width: number) => {
+			if (width < 768) {
+				table.getColumn("address")?.toggleVisibility(false);
+			} else {
+				table.getColumn("address")?.toggleVisibility(true);
+			}
+		},
+		[table],
+	);
 
-	useEffect(() => {
-		if (debouncedValue) {
-			handleSearchRequest();
-		} else {
-			setNewData(data);
-		}
-	}, [debouncedValue, handleSearchRequest, data]);
-
-	function handleWidthChange(width: number) {
-		if (width < 768) {
-			table.getColumn("address")?.toggleVisibility(false);
-		} else {
-			table.getColumn("address")?.toggleVisibility(true);
-		}
-	}
 	useLayoutEffect(() => {
 		setTimeout(() => handleWidthChange(width), 200);
-		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [width]);
-
-	const handleOnChange = useCallback(
-		(event: React.ChangeEvent<HTMLInputElement>) => {
-			setSearch(event.target.value);
-		},
-		[],
-	);
+	}, [width, handleWidthChange]);
 
 	return (
 		<div>
 			<div className="flex flex-col w-full justify-end items-end mb-4">
-				<MyInput
+				{/* <MyInput
 					placeholder="Search Customer"
 					value={search}
 					onChange={handleOnChange}
 					className="w-full py-6"
 					name=""
-				/>
-				{/*//! uncomment this <ComboBoxResponsive /> */}
+				/> */}
+				<ComboBoxResponsive setData={setNewData} />
 			</div>
 			<div className="rounded-md border">
 				<Table>

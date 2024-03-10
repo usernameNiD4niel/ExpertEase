@@ -11,7 +11,7 @@ const column: ColumnDef<Customer>[] = [
 		header: "FULL NAME",
 		cell: ({ row }) => {
 			return (
-				<div className="ml-0 flex flex-col">
+				<div className="ml-0 flex flex-col my-2">
 					<span>{row.getValue("fullName")}</span>
 					<span className="md:hidden">{row.getValue("address")}</span>
 				</div>

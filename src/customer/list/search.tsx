@@ -1,12 +1,9 @@
-"use client";
-
 import * as React from "react";
 
 import { useMediaQuery } from "@/hooks";
 import { Button } from "@/components/ui/button";
 import {
 	Command,
-	CommandEmpty,
 	CommandGroup,
 	CommandInput,
 	CommandItem,
@@ -18,68 +15,137 @@ import {
 	PopoverContent,
 	PopoverTrigger,
 } from "@/components/ui/popover";
+import { cn } from "@/lib/utils";
+import { getCustomerNames, searchCustomerTable } from "@/endpoints";
+import { CommandLoading } from "cmdk";
+import { useQuery } from "@tanstack/react-query";
+import { useNavigate } from "react-router-dom";
+import { Trash2 } from "lucide-react";
+import { Customer } from "@/constants/types";
 
-type Status = {
-	value: string;
-	label: string;
+type Props = {
+	setData: (data: Customer[]) => void;
 };
 
-const statuses: Status[] = [
-	{
-		value: "backlog",
-		label: "Backlog",
-	},
-	{
-		value: "todo",
-		label: "Todo",
-	},
-	{
-		value: "in progress",
-		label: "In Progress",
-	},
-	{
-		value: "done",
-		label: "Done",
-	},
-	{
-		value: "canceled",
-		label: "Canceled",
-	},
-];
-
-const ComboBoxResponsive = React.memo(() => {
+const ComboBoxResponsive = React.memo(({ setData }: Props) => {
 	const [open, setOpen] = React.useState(false);
 	const isDesktop = useMediaQuery("(min-width: 768px)");
-	const [selectedStatus, setSelectedStatus] = React.useState<Status | null>(
-		null,
+	const [selectedName, setSelectedName] = React.useState<string>("");
+
+	const router = useNavigate();
+
+	const { data, isPending, isError } = useQuery({
+		queryKey: ["customer", "search", "names"],
+		queryFn: getCustomerNames,
+	});
+
+	const fetchSearchQuery = React.useCallback(
+		async (query: string) => {
+			const data = await searchCustomerTable<Customer>(query, "name");
+			setData(data);
+		},
+		[setData],
 	);
+
+	React.useEffect(() => {
+		if (selectedName) {
+			fetchSearchQuery(selectedName);
+		}
+	}, [selectedName, fetchSearchQuery]);
+
+	// React.useEffect(() => {
+	// 	console.log("selected name", selectedName);
+	// 	if (selectedName) {
+	// 		router(`/customer-management/list?q=${selectedName}`);
+	// 	}
+	// }, [selectedName, router]);
+
+	const displayList = React.useMemo(() => {
+		if (isError) {
+			return (
+				<div className="flex items-center justify-center">
+					<p className="text-center">Failed to get all the customers</p>
+				</div>
+			);
+		}
+		return (
+			<CustomerNameList
+				setOpen={setOpen}
+				setSelectedName={setSelectedName}
+				isSearching={isPending}
+				names={data ?? []}
+			/>
+		);
+	}, [isPending, data, isError]);
+
+	const handleSearchClear = React.useCallback(() => {
+		console.log("handleSearchClear");
+		setSelectedName("");
+		router("/customer-management/list");
+	}, [router]);
 
 	if (isDesktop) {
 		return (
 			<Popover open={open} onOpenChange={setOpen}>
 				<PopoverTrigger asChild>
-					<Button variant="outline" className="w-[150px] justify-start">
-						{selectedStatus ? <>{selectedStatus.label}</> : <>+ Set status</>}
+					<Button
+						variant="outline"
+						className={cn(
+							"w-full text-center font-normal justify-start py-6",
+							selectedName
+								? "text-slate-800 border border-slate-400"
+								: "text-slate-400 hover:text-slate-400",
+						)}>
+						{selectedName ? (
+							<p className="flex justify-between items-center w-full">
+								<span>{selectedName}</span>
+								<Trash2
+									className="w-4 h-4 text-red-500"
+									onClick={handleSearchClear}
+								/>
+							</p>
+						) : (
+							<>Search customer</>
+						)}
 					</Button>
 				</PopoverTrigger>
-				<PopoverContent className="w-[200px] p-0" align="start">
-					<StatusList setOpen={setOpen} setSelectedStatus={setSelectedStatus} />
+				<PopoverContent className="w-full p-0" align="start">
+					{displayList}
 				</PopoverContent>
 			</Popover>
 		);
 	}
 
 	return (
-		<Drawer open={open} onOpenChange={setOpen}>
+		<Drawer
+			open={open}
+			onOpenChange={setOpen}
+			shouldScaleBackground
+			closeThreshold={1}>
 			<DrawerTrigger asChild>
-				<Button variant="outline" className="w-[150px] justify-start">
-					{selectedStatus ? <>{selectedStatus.label}</> : <>+ Set status</>}
+				<Button
+					variant="outline"
+					className={cn(
+						"w-full text-center font-normal justify-start py-6",
+						selectedName
+							? "text-slate-800 border border-slate-400"
+							: "text-slate-400 hover:text-slate-400",
+					)}>
+					{selectedName ? (
+						<p className="flex justify-between items-center w-full">
+							<span>{selectedName}</span>
+							<Trash2
+								className="w-4 h-4 text-red-500"
+								onClick={handleSearchClear}
+							/>
+						</p>
+					) : (
+						<>Search customer</>
+					)}
 				</Button>
 			</DrawerTrigger>
 			<DrawerContent>
-				<div className="mt-4 border-t">
-					<StatusList setOpen={setOpen} setSelectedStatus={setSelectedStatus} />
-				</div>
+				<div className="mt-4 border-t">{displayList}</div>
 			</DrawerContent>
 		</Drawer>
 	);
@@ -87,33 +153,66 @@ const ComboBoxResponsive = React.memo(() => {
 
 export default ComboBoxResponsive;
 
-function StatusList({
+function CustomerNameList({
 	setOpen,
-	setSelectedStatus,
+	setSelectedName,
+	isSearching,
+	names,
 }: {
 	setOpen: (open: boolean) => void;
-	setSelectedStatus: (status: Status | null) => void;
+	setSelectedName: (selectedName: string) => void;
+	isSearching: boolean;
+	names: string[];
 }) {
+	function displayCommandList() {
+		return (
+			<CommandGroup className="bg-slate-100">
+				<CommandItem value="value_1" onSelect={setSelectedName}>
+					Value 1
+				</CommandItem>
+			</CommandGroup>
+		);
+		if (isSearching) {
+			return (
+				<CommandLoading>
+					<p className="text-sm text-center mt-2">Searching...</p>
+				</CommandLoading>
+			);
+		}
+
+		if (names.length === 0) {
+			return (
+				<div className="text-sm flex justify-center my-4">
+					No customer exists.
+				</div>
+			);
+		}
+
+		return (
+			<CommandGroup className="bg-slate-100">
+				{names.map((name) => (
+					<CommandItem
+						key={name}
+						value={name}
+						onSelect={(value) => {
+							setSelectedName(names.find((_value) => _value === value) ?? "");
+							setOpen(false);
+						}}>
+						{name}
+					</CommandItem>
+				))}
+			</CommandGroup>
+		);
+	}
 	return (
 		<Command>
-			<CommandInput placeholder="Filter status..." />
 			<CommandList>
-				<CommandEmpty>No results found.</CommandEmpty>
-				<CommandGroup>
-					{statuses.map((status) => (
-						<CommandItem
-							key={status.value}
-							value={status.value}
-							onSelect={(value) => {
-								setSelectedStatus(
-									statuses.find((priority) => priority.value === value) || null,
-								);
-								setOpen(false);
-							}}>
-							{status.label}
-						</CommandItem>
-					))}
-				</CommandGroup>
+				<CommandInput
+					placeholder="Search a customer"
+					autoFocus
+					disabled={isSearching || names.length === 0}
+				/>
+				{displayCommandList()}
 			</CommandList>
 		</Command>
 	);
