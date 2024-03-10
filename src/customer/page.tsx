@@ -6,7 +6,7 @@ import { Outlet } from "react-router-dom";
 
 export default function CustomerPage() {
 	return (
-		<section>
+		<section className="headingMargin md:mt-0">
 			<CustomerTabMutator tab={CustomerTabs.List} />
 			<TabMutator currentTab={AvailableTabs["Customer Management"]} />
 			<div className="w-full bg-black text-white flex gap-2">

@@ -70,7 +70,7 @@ export default function Personal() {
 
 	return (
 		<>
-			<div className="fixed top-0 left-0 w-full md:ms-[320px]">
+			<div className="fixed top-0 left-0 w-full md:ms-[320px] z-[51]">
 				<HeaderWithBack text="Add Customer - Personal" />
 			</div>
 			<div className="w-full flex items-center justify-center">

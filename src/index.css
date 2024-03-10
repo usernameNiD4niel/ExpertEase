@@ -8,6 +8,12 @@
 	box-sizing: border-box;
 }
 
+@layer components {
+	.headingMargin {
+		@apply mt-14;
+	}
+}
+
 @layer base {
 	:root {
 		--background: 0 0% 100%;

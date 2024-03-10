@@ -53,13 +53,6 @@ const ComboBoxResponsive = React.memo(({ setData }: Props) => {
 		}
 	}, [selectedName, fetchSearchQuery]);
 
-	// React.useEffect(() => {
-	// 	console.log("selected name", selectedName);
-	// 	if (selectedName) {
-	// 		router(`/customer-management/list?q=${selectedName}`);
-	// 	}
-	// }, [selectedName, router]);
-
 	const displayList = React.useMemo(() => {
 		if (isError) {
 			return (
@@ -79,7 +72,6 @@ const ComboBoxResponsive = React.memo(({ setData }: Props) => {
 	}, [isPending, data, isError]);
 
 	const handleSearchClear = React.useCallback(() => {
-		console.log("handleSearchClear");
 		setSelectedName("");
 		router("/customer-management/list");
 	}, [router]);
@@ -165,13 +157,6 @@ function CustomerNameList({
 	names: string[];
 }) {
 	function displayCommandList() {
-		return (
-			<CommandGroup className="bg-slate-100">
-				<CommandItem value="value_1" onSelect={setSelectedName}>
-					Value 1
-				</CommandItem>
-			</CommandGroup>
-		);
 		if (isSearching) {
 			return (
 				<CommandLoading>
