@@ -10,7 +10,10 @@
 
 @layer components {
 	.headingMargin {
-		@apply mt-14;
+		@apply mt-14 md:mt-0;
+	}
+	.headingMarginWithHeader {
+		@apply mt-14 md:mt-16;
 	}
 }
 

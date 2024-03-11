@@ -1,6 +1,6 @@
 export default async function getCustomerNames() {
 	const response = await fetch(
-		`${import.meta.env.VITE_BACKEND_URL}/api/customer/names`,
+		`${import.meta.env.VITE_BACKEND_URL}/api/customers/names`,
 		{
 			headers: {
 				"Content-Type": "application/json",
@@ -10,7 +10,7 @@ export default async function getCustomerNames() {
 
 	if (response.ok) {
 		const data = await response.json();
-		return data.names as string[];
+		return data.customers as string[];
 	}
 
 	return [];

@@ -184,7 +184,7 @@ export default function CustomerDetailsItems() {
 
 			<div className="w-full flex items-center justify-center">
 				<form
-					className="flex gap-4 flex-col p-4 my-4 md:my-16 w-full max-w-4xl"
+					className="flex gap-4 flex-col p-4 headingMarginWithHeader w-full max-w-4xl"
 					onSubmit={handleFormSubmit}>
 					{/* Header Form */}
 					<div className="w-full flex justify-between items-center">
