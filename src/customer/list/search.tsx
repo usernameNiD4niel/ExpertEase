@@ -39,6 +39,8 @@ const ComboBoxResponsive = React.memo(({ setData }: Props) => {
 		queryFn: getCustomerNames,
 	});
 
+	console.log(`selected name ${selectedName}`);
+
 	const fetchSearchQuery = React.useCallback(
 		async (query: string) => {
 			const data = await searchCustomerTable<Customer>(query, "name");
@@ -103,6 +105,7 @@ const ComboBoxResponsive = React.memo(({ setData }: Props) => {
 				</PopoverTrigger>
 				<PopoverContent className="w-full p-0" align="start">
 					{displayList}
+					{/* {displayList} */}
 				</PopoverContent>
 			</Popover>
 		);
@@ -180,7 +183,13 @@ function CustomerNameList({
 						key={name}
 						value={name}
 						onSelect={(value) => {
-							setSelectedName(names.find((_value) => _value === value) ?? "");
+							console.log(`value changed: ${value}`);
+							setSelectedName(
+								names.find(
+									(_value) =>
+										_value.toLocaleLowerCase() === value.toLowerCase(),
+								) ?? "",
+							);
 							setOpen(false);
 						}}>
 						{name}
