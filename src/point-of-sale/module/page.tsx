@@ -6,10 +6,10 @@ import { Outlet } from "react-router-dom";
 
 export default function Module() {
 	return (
-		<section>
+		<section className="headingMargin md:mt-0">
 			<POSTabMutator tab={POSTab.Service} />
 			<TabMutator currentTab={AvailableTabs["Point of Sale"]} />
-			<div className="w-full bg-black dark:bg-[#0A1526]/50 text-white flex gap-2">
+			<div className="w-full flex gap-2 bg-black text-white">
 				{/* Tab */}
 				<Tabs />
 			</div>

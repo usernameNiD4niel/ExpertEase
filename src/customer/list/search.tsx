@@ -39,8 +39,6 @@ const ComboBoxResponsive = React.memo(({ setData }: Props) => {
 		queryFn: getCustomerNames,
 	});
 
-	console.log(`selected name ${selectedName}`);
-
 	const fetchSearchQuery = React.useCallback(
 		async (query: string) => {
 			const data = await searchCustomerTable<Customer>(query, "name");
