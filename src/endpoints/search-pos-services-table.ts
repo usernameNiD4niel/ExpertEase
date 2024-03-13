@@ -1,11 +1,11 @@
 export default async function searchPOSServicesTable<TData>(
 	searchQuery: string,
-	property: string,
+	property: string, // services or products
 ): Promise<TData[]> {
 	const response = await fetch(
 		`${
 			import.meta.env.VITE_BACKEND_URL
-		}/api/customers/search?query=${searchQuery}`,
+		}/api/pos/${property}/search?query=${searchQuery}`,
 		{
 			headers: {
 				"Content-Type": "application/json",

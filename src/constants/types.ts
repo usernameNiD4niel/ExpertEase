@@ -107,6 +107,14 @@ export type Services = {
 	price: string;
 };
 
+export type Products = {
+	id: string;
+	product: string;
+	description: string;
+	category: string; // variant, size and dimensions
+	price: string;
+};
+
 export type DropdownItem = {
 	text: string | JSX.Element;
 	action?: () => void;

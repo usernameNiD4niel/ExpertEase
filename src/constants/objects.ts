@@ -1,4 +1,4 @@
-import { SelectType, Services } from "./types";
+import { Products, SelectType, Services } from "./types";
 
 const items: SelectType[] = [
 	{
@@ -45,4 +45,29 @@ const servicesItems: Services[] = [
 	},
 ];
 
-export { items, servicesItems };
+// ! Delete this
+const productsItems: Products[] = [
+	{
+		description: "Just a regular check-up",
+		id: "1",
+		price: "100.00",
+		category: "Variant/Size/Dimension",
+		product: "Coca-cola",
+	},
+	{
+		description: "Check-up with laboratory analysis",
+		id: "2",
+		price: "100.00",
+		category: "Variant/Size/Dimension",
+		product: "Amino Acid Tablet",
+	},
+	{
+		description: "Overnight stay-in",
+		id: "3",
+		price: "500.00",
+		category: "Variant/Size/Dimension",
+		product: "Royal",
+	},
+];
+
+export { items, servicesItems, productsItems };

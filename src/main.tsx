@@ -21,6 +21,7 @@ import getCustomers from "./endpoints/get-customers.ts";
 import getCustomer from "./endpoints/get-customer.ts";
 import ModuleServices from "./point-of-sale/module/services/page.tsx";
 import ServicesItem from "./point-of-sale/services/item/page.tsx";
+import Products from "./point-of-sale/products/page.tsx";
 
 const router = createBrowserRouter([
 	{
@@ -37,12 +38,16 @@ const router = createBrowserRouter([
 				element: <PointOfSalePage />,
 			},
 			{
-				path: "/point-of-sale/module/services",
+				path: "/point-of-sale/module",
 				element: <Module />,
 				children: [
 					{
-						index: true,
+						path: "services",
 						element: <Services />,
+					},
+					{
+						path: "products",
+						element: <Products />,
 					},
 				],
 			},
