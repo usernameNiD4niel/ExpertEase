@@ -1,10 +1,12 @@
 import MyInput from "@/components/custom/my-input";
-import SampleTableImage from "/sample-table-image.png";
+import SampleTableImage from "@/public/sample-table-image.png";
 import { Button } from "@/components/ui/button";
+import MyIconBack from "@/components/custom/my-icon-back";
 
 export default function ModuleServices() {
 	return (
-		<div className="flex flex-col gap-5 items-center py-12 px-4 w-full">
+		<div className="flex flex-col gap-5 items-center py-12 px-4 absolute left-0 right-0 top-0 z-50 bg-white">
+			<MyIconBack />
 			<img
 				src={SampleTableImage}
 				alt="Sample Table Image"
@@ -42,7 +44,9 @@ export default function ModuleServices() {
 				</div>
 			</div>
 
-			<Button className="text-white bg-[#284B63] w-full" size="lg">
+			<Button
+				className="text-white bg-[#284B63] hover:bg-[#284B63]/90 w-full py-6"
+				size="lg">
 				Add to cart - P 150.00
 			</Button>
 		</div>

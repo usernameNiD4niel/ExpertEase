@@ -1,4 +1,4 @@
-import { SelectType } from "./types";
+import { SelectType, Services } from "./types";
 
 const items: SelectType[] = [
 	{
@@ -23,4 +23,26 @@ const items: SelectType[] = [
 	},
 ];
 
-export { items };
+// ! Delete this
+const servicesItems: Services[] = [
+	{
+		description: "Just a regular check-up",
+		id: "1",
+		price: "100.00",
+		service: "Regular Check-up",
+	},
+	{
+		description: "Check-up with laboratory analysis",
+		id: "2",
+		price: "100.00",
+		service: "Laboratory Analysis",
+	},
+	{
+		description: "Overnight stay-in",
+		id: "3",
+		price: "500.00",
+		service: "Stay-in",
+	},
+];
+
+export { items, servicesItems };
