@@ -20,6 +20,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import getCustomers from "./endpoints/get-customers.ts";
 import getCustomer from "./endpoints/get-customer.ts";
 import ModuleServices from "./point-of-sale/module/services/page.tsx";
+import ServicesItem from "./point-of-sale/services/item/page.tsx";
 
 const router = createBrowserRouter([
 	{
@@ -47,6 +48,10 @@ const router = createBrowserRouter([
 			},
 			{
 				path: "/point-of-sale/module/services/:id",
+				element: <ServicesItem />,
+			},
+			{
+				path: "/point-of-sale/module/products/:id",
 				element: <ModuleServices />,
 			},
 			{
