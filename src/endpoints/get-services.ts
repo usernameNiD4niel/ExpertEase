@@ -2,7 +2,7 @@ import { ServicesType } from "@/constants/types";
 
 export default async function getServices() {
 	const response = await fetch(
-		`${import.meta.env.VITE_BACKEND_URL}/api/service`,
+		`${import.meta.env.VITE_BACKEND_URL}/api/pos/services`,
 		{
 			headers: {
 				"Content-Type": "application/json",
