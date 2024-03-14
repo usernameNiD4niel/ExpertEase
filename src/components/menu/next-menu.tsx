@@ -46,7 +46,7 @@ export default function NextMenu() {
 					to={to}
 					className={`${buttonClass} ${
 						activeTab === availableTabs
-							? "text-[#284B63] dark:text-[#0A1526] font-semibold bg-slate-50"
+							? "text-[#284B63] font-semibold bg-slate-50"
 							: "text-white"
 					} ${hoverButtonClass}`}
 					onClick={() => handleMenuNavigation(availableTabs)}>
@@ -67,12 +67,12 @@ export default function NextMenu() {
 			</SheetTrigger>
 			<SheetContent
 				side={"right"}
-				className="bg-[#284B63] dark:bg-[#0A1526] overflow-y-auto h-full">
+				className="bg-[#284B63] overflow-y-auto h-full">
 				<SheetHeader className="h-full">
 					<SheetTitle className="flex items-center justify-center relative">
 						<SheetClose
 							asChild
-							className="w-full bg-[#284B63] dark:bg-[#0A1526] flex hover:bg-white dark:hover:bg-white hover:text-[#284B63] z-20 rounded-md hover:cursor-pointer">
+							className="w-full bg-[#284B63] flex hover:bg-white hover:text-[#284B63] z-20 rounded-md hover:cursor-pointer">
 							<p className={publiClassDrawer}>
 								<span className="text-xl">
 									<IoChevronBackOutline />
@@ -80,7 +80,7 @@ export default function NextMenu() {
 								Menu
 							</p>
 						</SheetClose>
-						<p className="bg-[#284B63] dark:bg-[#0A1526] z-10 w-6 h-6 absolute -right-3 -top-3"></p>
+						<p className="bg-[#284B63] z-10 w-6 h-6 absolute -right-3 -top-3"></p>
 					</SheetTitle>
 					<SheetDescription className="flex w-full flex-col items-center justify-between h-full py-2">
 						<p className="flex w-full flex-col items-center h-full">

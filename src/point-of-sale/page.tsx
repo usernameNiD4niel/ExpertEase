@@ -20,7 +20,7 @@ export default function PointOfSalePage() {
 	}
 
 	return (
-		<div className="p-3 md:py-4 md:px-12 h-full">
+		<div className="p-3 headingMargin md:py-4 md:px-12">
 			<TabMutator currentTab={AvailableTabs["Point of Sale"]} />
 			<div className="p-2 flex flex-col w-full justify-end items-end">
 				<MyInput
@@ -28,12 +28,12 @@ export default function PointOfSalePage() {
 					className="w-full filter-none"
 					name=""
 				/>
-				<Button className="p-2 bg-transparent flex items-center justify-center gap-2 text-[#284B63]">
+				<button className="p-2 bg-transparent flex items-center justify-center gap-2 text-[#284B63]">
 					<span className="mt-[3px]">
 						<AddService />
 					</span>
 					<span className="text-sm">ADD CUSTOMER</span>
-				</Button>
+				</button>
 			</div>
 
 			<form className="p-3 flex flex-col gap-y-5" onSubmit={handleFormSubmit}>
