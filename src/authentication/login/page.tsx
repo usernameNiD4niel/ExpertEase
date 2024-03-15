@@ -62,7 +62,7 @@ export default function Login() {
 
 	return (
 		<div className="h-screen flex items-center justify-center">
-			<div className="flex w-full md:w-auto drop-shadow-lg h-screen md:h-fit md:rounded-lg items-center justify-center bg-[#284B63] dark:bg-[#284B63]/20">
+			<div className="flex w-full md:w-auto drop-shadow-lg h-screen md:h-fit md:rounded-lg items-center justify-center bg-[#284B63]">
 				<img
 					src={NakaTindog}
 					alt="Cute dog image"
@@ -104,7 +104,7 @@ export default function Login() {
 											<Input
 												placeholder="Mobile Number"
 												type="number"
-												className="py-[1.35rem] dark:bg-transparent dark:border border-slate-100"
+												className="py-[1.35rem] border-slate-100"
 												{...field}
 											/>
 										</FormControl>
@@ -121,7 +121,7 @@ export default function Login() {
 											<Input
 												placeholder="4 Digit Pin"
 												type="password"
-												className="py-[1.35rem] dark:bg-transparent dark:border border-slate-100"
+												className="py-[1.35rem] border-slate-100"
 												{...field}
 											/>
 										</FormControl>
@@ -142,7 +142,7 @@ export default function Login() {
 								<Button
 									type="submit"
 									size={"lg"}
-									className="w-full bg-slate-900 dark:bg-slate-100">
+									className="w-full bg-slate-900">
 									Submit
 								</Button>
 							)}
@@ -152,12 +152,12 @@ export default function Login() {
 						<Input
 							type="number"
 							placeholder="Mobile Number"
-							className="py-[1.35rem] dark:bg-transparent dark:border border-slate-100"
+							className="py-[1.35rem] border-slate-100"
 						/>
 						<Input
 							type="password"
 							placeholder="Password"
-							className="py-[1.35rem] dark:bg-transparent dark:border border-slate-100"
+							className="py-[1.35rem] border-slate-100"
 						/>
 					</div>
 					<Button
@@ -168,9 +168,7 @@ export default function Login() {
 					</Button> */}
 					<p className="text-sm text-slate-100">
 						Don&apos;t have an account yet?{" "}
-						<Link
-							className="text-blue-500 dark:text-blue-500 font-semibold"
-							to={"/register"}>
+						<Link className="text-blue-500 font-semibold" to={"/register"}>
 							Register
 						</Link>
 					</p>
