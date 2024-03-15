@@ -2,7 +2,11 @@ import React from "react";
 import { createRoot } from "react-dom/client";
 import App from "./App.tsx";
 import "./index.css";
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import {
+	createBrowserRouter,
+	redirect,
+	RouterProvider,
+} from "react-router-dom";
 import Login from "./authentication/login/page.tsx";
 import Register from "./authentication/register/page.tsx";
 import ThemeProvider from "@/components/provider/theme-provider.tsx";
@@ -22,11 +26,19 @@ import getCustomer from "./endpoints/get-customer.ts";
 import ModuleServices from "./point-of-sale/module/services/page.tsx";
 import ServicesItem from "./point-of-sale/services/item/page.tsx";
 import Products from "./point-of-sale/products/page.tsx";
+import Cookies from "js-cookie";
 
 const router = createBrowserRouter([
 	{
 		path: "/",
 		element: <App />,
+		loader: async () => {
+			const token = Cookies.get("access_token_cookie");
+			if (!token) {
+				return redirect("/login");
+			}
+			return null;
+		},
 		children: [
 			{
 				path: "/",

@@ -1,13 +1,15 @@
 import { AddCustomerType } from "@/constants/types";
+import Cookies from "js-cookie";
 
 export default async function postCustomer(customerData: AddCustomerType) {
+	const access_token_cookie = Cookies.get("access_token_cookie");
+
 	const response = await fetch(
 		`${import.meta.env.VITE_BACKEND_URL}/api/customer/add`,
 		{
 			headers: {
 				"Content-Type": "application/json",
-				Authorization:
-					"Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTcxMDUxMDY5NSwianRpIjoiYTBiNDZjZjUtODg5Yy00ZjExLTllM2YtMWY3MjMwOTY4OTcyIiwidHlwZSI6InJlZnJlc2giLCJzdWIiOnsidXNlcl9pZCI6NiwiZXhwIjoiU3VuLCAxNCBBcHIgMjAyNCAxMzo1MTozNSBHTVQifSwibmJmIjoxNzEwNTEwNjk1LCJleHAiOjE3MTMxMDI2OTV9.tMYke3nPJ2nanI7HQbJ5Sh7uKiCNQjkBNHEOHELRiTc",
+				Authorization: `Bearer ${access_token_cookie}`,
 			},
 			method: "POST",
 			body: JSON.stringify(customerData),

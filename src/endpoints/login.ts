@@ -1,4 +1,5 @@
 import { LoginType } from "@/constants/types";
+import Cookies from "js-cookie";
 
 export default async function login(loginData: LoginType) {
 	const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/login`, {
@@ -12,6 +13,9 @@ export default async function login(loginData: LoginType) {
 	const data = await response.json();
 	if (response.ok) {
 		// Store user data to cookies
+		Cookies.set("access_token_cookie", data.access_token_cookie);
+		Cookies.set("refresh_token", data.refresh_token);
+		Cookies.set("user", data.user);
 		/**
 		 * {
     "access_module": [],
