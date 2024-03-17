@@ -24,9 +24,10 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import getCustomers from "./endpoints/get-customers.ts";
 import getCustomer from "./endpoints/get-customer.ts";
 import ModuleServices from "./point-of-sale/module/services/page.tsx";
-import ServicesItem from "./point-of-sale/services/item/page.tsx";
 import Products from "./point-of-sale/products/page.tsx";
 import Cookies from "js-cookie";
+import ModuleProducts from "./point-of-sale/module/products/page.tsx";
+import CartPage from "./point-of-sale/cart/page.tsx";
 
 const router = createBrowserRouter([
 	{
@@ -65,11 +66,15 @@ const router = createBrowserRouter([
 			},
 			{
 				path: "/point-of-sale/module/services/:id",
-				element: <ServicesItem />,
+				element: <ModuleServices />,
 			},
 			{
 				path: "/point-of-sale/module/products/:id",
-				element: <ModuleServices />,
+				element: <ModuleProducts />,
+			},
+			{
+				path: "/point-of-sale/module/products/:id/cart",
+				element: <CartPage />,
 			},
 			{
 				path: "/customer-management",

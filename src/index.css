@@ -15,6 +15,12 @@
 	.headingMarginWithHeader {
 		@apply mt-14 md:mt-16;
 	}
+	.blue-bg {
+		@apply bg-[#047FFF] text-white;
+	}
+	.blue-text {
+		@apply text-[#047FFF];
+	}
 }
 
 @layer base {

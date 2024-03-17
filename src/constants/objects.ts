@@ -1,4 +1,4 @@
-import { Products, SelectType, Services } from "./types";
+import { CartProps, Products, SelectType, Services } from "./types";
 
 const items: SelectType[] = [
 	{
@@ -70,4 +70,28 @@ const productsItems: Products[] = [
 	},
 ];
 
-export { items, servicesItems, productsItems };
+// ! Delete this
+const orderSummary: CartProps[] = [
+	{
+		price: "₱45.00",
+		subtitle: "Variant/size/dimension",
+		times: "1",
+		title: "Regular Check-up",
+		discount: "5",
+	},
+	{
+		price: "₱45.00",
+		subtitle: "Variant/size/dimension",
+		times: "3",
+		title: "Laboratory Analysis",
+	},
+	{
+		price: "₱45.00",
+		subtitle: "Variant/size/dimension",
+		times: "1",
+		title: "Coke in can",
+		discount: "20",
+	},
+];
+
+export { items, servicesItems, productsItems, orderSummary };

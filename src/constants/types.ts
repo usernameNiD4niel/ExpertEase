@@ -120,3 +120,11 @@ export type DropdownItem = {
 	action?: () => void;
 	Icon?: IconType;
 };
+
+export type CartProps = {
+	times: string;
+	title: string;
+	subtitle: string;
+	price: string;
+	discount?: string;
+};
