@@ -7,7 +7,7 @@ import { Input } from "@/components/ui/input";
 
 export default function CartPage() {
 	return (
-		<section className="fixed top-0 left-0 w-full md:ms-[320px] z-50 bottom-0 right-0 overflow-auto">
+		<section className="fixed top-0 left-0 w-full md:ms-[320px] z-50 bottom-0 right-0 overflow-auto bg-slate-50">
 			<HeaderWithBack text="Cart" />
 			<div className="md:w-[calc(100%-300px)] w-full flex flex-col items-center mb-10">
 				<div className="w-full p-6 blue-bg flex items-center flex-col">
@@ -40,7 +40,7 @@ export default function CartPage() {
 					</ul>
 
 					{/* Subtotal */}
-					<div className="w-full space-y-1 px-4 my-4">
+					<div className="w-full space-y-1 px-4 my-4 p-6">
 						<div className="w-full flex items-center justify-between">
 							<p className="text-lg">Subtotal</p>
 							<h5 className="font-bold text-lg">₱90.00</h5>
@@ -53,7 +53,7 @@ export default function CartPage() {
 				</div>
 
 				{/* General Discount */}
-				<div className="w-full md:max-w-4xl mt-4 space-y-2">
+				<div className="w-full md:max-w-4xl mt-4 space-y-2 px-4 md:px-4 flex flex-col">
 					<h3>General Discount</h3>
 					<div className="relative w-full">
 						<Input placeholder="0.00" className="w-full py-6 pe-10" />
@@ -62,13 +62,13 @@ export default function CartPage() {
 				</div>
 
 				{/* Bill Summary */}
-				<div className="w-full md:max-w-4xl mt-4 space-y-2">
-					<h3>Bill Summary</h3>
+				<div className="w-full md:max-w-4xl mt-4 space-y-2 px-4">
+					<h3 className="font-semibold text-lg">Bill Summary</h3>
 					<div className="w-full space-y-2">
 						{/* Subtotal */}
 						<div className="w-full flex items-center justify-between">
-							<p>Subtotal</p>
-							<p className="space-x-1">
+							<p className="">Subtotal</p>
+							<p className="space-x-1 ">
 								<span className="text-xs md:text-sm">PHP</span>
 								<span>2,500.00</span>
 							</p>
@@ -76,8 +76,8 @@ export default function CartPage() {
 
 						{/* Total Discount */}
 						<div className="w-full flex items-center justify-between">
-							<p>Total Discounts</p>
-							<p className="space-x-1">
+							<p className="">Total Discounts</p>
+							<p className="space-x-1 ">
 								<span className="text-xs md:text-sm">- PHP</span>
 								<span>500.00</span>
 							</p>
@@ -85,8 +85,8 @@ export default function CartPage() {
 
 						{/* VAT */}
 						<div className="w-full flex items-center justify-between">
-							<p>VAT</p>
-							<p className="space-x-1">
+							<p className="">VAT</p>
+							<p className="space-x-1 ">
 								<span className="text-xs md:text-sm">- PHP</span>
 								<span>50.00</span>
 							</p>
@@ -100,6 +100,26 @@ export default function CartPage() {
 							<p className="space-x-1 text-xl">
 								<span>PHP</span>
 								<span>2,550.00</span>
+							</p>
+						</div>
+
+						{/* Transaction ID */}
+						<div className="w-full flex items-center justify-between">
+							<p className="">Transaction ID</p>
+							<p className=" text-sm space-x-1">ACV2456</p>
+						</div>
+
+						{/* Date */}
+						<div className="w-full flex items-center justify-between">
+							<p className="">Date</p>
+							<p className=" text-sm space-x-1">September 3, 2022</p>
+						</div>
+
+						{/* Location */}
+						<div className="w-full flex items-center justify-between">
+							<p className="">Location</p>
+							<p className=" text-sm space-x-1">
+								Brgy 123, Mandaluyong City, NCR
 							</p>
 						</div>
 					</div>
