@@ -21,6 +21,12 @@
 	.blue-text {
 		@apply text-[#047FFF];
 	}
+	.primary-text {
+		@apply text-[#284B63];
+	}
+	.primary-bg {
+		@apply bg-[#284B63];
+	}
 }
 
 @layer base {

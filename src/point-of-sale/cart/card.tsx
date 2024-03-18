@@ -8,16 +8,17 @@ export default function CardCart({
 	discount,
 }: CartProps) {
 	return (
-		<li className="w-full flex justify-between p-4 items-center">
-			{/* Times */}
-			<div className="blue-text font-semibold text-sm p-2 rounded border border-slate-400 text-center">
-				{times}x
-			</div>
-
-			{/* Text Content */}
-			<div className="space-y-2">
-				<h5 className="text-lg font-bold text-slate-700">{title}</h5>
-				<p className="text-xs text-slate-600">{subtitle}</p>
+		<li className="w-full flex justify-between py-4 items-center">
+			<div className="w-full flex items-center gap-x-7">
+				{/* Times */}
+				<div className="blue-text font-semibold text-sm px-2 py-1 rounded border border-slate-400 border-opacity-45 text-center">
+					{times}x
+				</div>
+				{/* Text Content */}
+				<div className="">
+					<h5 className="text-lg font-bold text-slate-700">{title}</h5>
+					<p className="text-xs text-slate-600">{subtitle}</p>
+				</div>
 			</div>
 
 			{/* Prices */}

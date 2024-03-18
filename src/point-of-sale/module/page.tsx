@@ -6,7 +6,7 @@ import { Outlet } from "react-router-dom";
 
 export default function Module() {
 	return (
-		<section className="headingMargin md:mt-0">
+		<section className="headingMargin md:mt-0 flex flex-col justify-end">
 			<POSTabMutator tab={POSTab.Service} />
 			<TabMutator currentTab={AvailableTabs["Point of Sale"]} />
 			<div className="w-full flex gap-2 bg-black text-white">

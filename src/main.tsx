@@ -73,7 +73,7 @@ const router = createBrowserRouter([
 				element: <ModuleProducts />,
 			},
 			{
-				path: "/point-of-sale/module/products/:id/cart",
+				path: "/point-of-sale/cart",
 				element: <CartPage />,
 			},
 			{
