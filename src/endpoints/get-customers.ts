@@ -13,6 +13,7 @@ export default async function getCustomers() {
 				"Content-Type": "application/json",
 				Authorization: `Bearer ${access_token_cookie}`,
 			},
+			credentials: "include",
 		},
 	);
 
