@@ -41,6 +41,7 @@ export default function ListTable({ data }: ListTableProps) {
 		initialState: {
 			columnVisibility: {
 				id: false,
+				discount: false,
 			},
 		},
 	});
@@ -68,8 +69,10 @@ export default function ListTable({ data }: ListTableProps) {
 	function handleWidthChange(width: number) {
 		if (width < 768) {
 			table.getColumn("description")?.toggleVisibility(false);
+			// table.getColumn("discount")?.toggleVisibility(false);
 		} else {
 			table.getColumn("description")?.toggleVisibility(true);
+			// table.getColumn("discount")?.toggleVisibility(true);
 		}
 	}
 	useLayoutEffect(() => {

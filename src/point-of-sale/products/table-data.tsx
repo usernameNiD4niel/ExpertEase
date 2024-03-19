@@ -41,6 +41,8 @@ export default function ListTable({ data }: ListTableProps) {
 		initialState: {
 			columnVisibility: {
 				id: false,
+				unit: false,
+				discount: false,
 			},
 		},
 	});

@@ -105,6 +105,7 @@ export type Services = {
 	service: string;
 	description: string;
 	price: string;
+	discount: string;
 };
 
 export type Products = {
@@ -113,6 +114,8 @@ export type Products = {
 	description: string;
 	category: string; // variant, size and dimensions
 	price: string;
+	unit: string;
+	discount: string;
 };
 
 export type DropdownItem = {

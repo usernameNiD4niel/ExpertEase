@@ -30,18 +30,21 @@ const servicesItems: Services[] = [
 		id: "1",
 		price: "100.00",
 		service: "Regular Check-up",
+		discount: "0",
 	},
 	{
 		description: "Check-up with laboratory analysis",
 		id: "2",
 		price: "100.00",
 		service: "Laboratory Analysis",
+		discount: "50",
 	},
 	{
 		description: "Overnight stay-in",
 		id: "3",
 		price: "500.00",
 		service: "Stay-in",
+		discount: "0",
 	},
 ];
 
@@ -53,6 +56,8 @@ const productsItems: Products[] = [
 		price: "100.00",
 		category: "Variant/Size/Dimension",
 		product: "Coca-cola",
+		discount: "10",
+		unit: "Piece",
 	},
 	{
 		description: "Check-up with laboratory analysis",
@@ -60,6 +65,8 @@ const productsItems: Products[] = [
 		price: "100.00",
 		category: "Variant/Size/Dimension",
 		product: "Amino Acid Tablet",
+		discount: "0",
+		unit: "Box",
 	},
 	{
 		description: "Overnight stay-in",
@@ -67,6 +74,8 @@ const productsItems: Products[] = [
 		price: "500.00",
 		category: "Variant/Size/Dimension",
 		product: "Royal",
+		discount: "0",
+		unit: "Piece",
 	},
 ];
 
