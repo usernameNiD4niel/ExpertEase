@@ -75,17 +75,20 @@ export default function PointOfSalePage() {
 					<MyInput
 						placeholder="Full Name"
 						name="fullName"
-						defaultValue={customers[0].fullName}
+						defaultValue={customers.length > 0 ? customers[0].fullName : ""}
+						disabled
 					/>
 					<MyInput
 						placeholder="Address"
 						name="address"
-						defaultValue={customers[0].address}
+						disabled
+						defaultValue={customers.length > 0 ? customers[0].address : ""}
 					/>
 					<MyInput
 						placeholder="Mobile Number"
 						name="mobileNumber"
-						defaultValue={customers[0].mobileNumber}
+						disabled
+						defaultValue={customers.length > 0 ? customers[0].mobileNumber : ""}
 					/>
 				</div>
 
