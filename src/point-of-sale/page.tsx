@@ -3,13 +3,26 @@ import TabMutator from "@/components/custom/tab-mutator";
 import { AddService } from "@/components/icons";
 import { Button } from "@/components/ui/button";
 import { AvailableTabs } from "@/constants/enums";
-import { useNavigation } from "@/hooks";
-import { FormEvent, useEffect } from "react";
+import { Customer } from "@/constants/types";
+import { searchCustomerTable } from "@/endpoints";
+import { useDebounce, useNavigation } from "@/hooks";
+import {
+	// ChangeEvent,
+	FormEvent,
+	useCallback,
+	useEffect,
+	useState,
+} from "react";
 import { useNavigate } from "react-router-dom";
+import ComboBoxResponsive from "./combobox-responsive";
 
 export default function PointOfSalePage() {
 	const router = useNavigate();
 	const [setActive] = useNavigation((state) => [state.setActiveTab]);
+	const [search, setSearch] = useState("");
+	const [customers, setCustomers] = useState<Customer[]>([]);
+
+	const debounceSearch = useDebounce(search);
 
 	// eslint-disable-next-line react-hooks/exhaustive-deps
 	useEffect(() => setActive(AvailableTabs["Point of Sale"]), []);
@@ -19,15 +32,34 @@ export default function PointOfSalePage() {
 		router("/point-of-sale/module/services");
 	}
 
+	// const handleSearch = useCallback((e: ChangeEvent<HTMLInputElement>) => {
+	// 	setSearch(e.target.value);
+	// }, []);
+
+	const handleSearchRequest = useCallback(async (search: string) => {
+		const customers = await searchCustomerTable<Customer>(search, "name");
+		setCustomers(customers);
+		setSearch("");
+	}, []);
+
+	useEffect(() => {
+		if (debounceSearch) {
+			handleSearchRequest(debounceSearch);
+		}
+	}, [debounceSearch, handleSearchRequest]);
+
 	return (
 		<div className="p-3 headingMargin md:py-4 md:px-12">
 			<TabMutator currentTab={AvailableTabs["Point of Sale"]} />
 			<div className="p-2 flex flex-col w-full justify-end items-end">
-				<MyInput
+				<ComboBoxResponsive />
+				{/* <MyInput
 					placeholder="Search Customer"
 					className="w-full filter-none"
 					name=""
-				/>
+					value={search}
+					onChange={handleSearch}
+				/> */}
 				<button className="p-2 bg-transparent flex items-center justify-center gap-2 text-[#284B63]">
 					<span className="mt-[3px]">
 						<AddService />
@@ -40,9 +72,17 @@ export default function PointOfSalePage() {
 				<h2 className="font-bold">Details</h2>
 
 				<div className="w-full flex flex-col gap-y-5">
-					<MyInput placeholder="Full Name" name="fullName" />
-					<MyInput placeholder="Address" name="address" />
-					<MyInput placeholder="Mobile Number" name="mobileNumber" />
+					{customers.map((customer) => (
+						<>
+							<MyInput
+								placeholder="Full Name"
+								name="fullName"
+								value={customer.fullName}
+							/>
+							<MyInput placeholder="Address" name="address" />
+							<MyInput placeholder="Mobile Number" name="mobileNumber" />
+						</>
+					))}
 				</div>
 
 				<Button
