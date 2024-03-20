@@ -49,6 +49,7 @@ export default function PointOfSalePage() {
 		if (search) {
 			handleSearchRequest(search);
 		}
+		console.log(search);
 	}, [search, handleSearchRequest]);
 
 	return (
@@ -74,6 +75,8 @@ export default function PointOfSalePage() {
 				{customers.length > 0 && (
 					<pre>{JSON.stringify(customers, null, 2)}</pre>
 				)}
+
+				<p> search {search}</p>
 
 				<div className="w-full flex flex-col gap-y-5">
 					<MyInput

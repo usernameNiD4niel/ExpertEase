@@ -35,7 +35,7 @@ const ComboBoxResponsive = React.memo(({ setValue, names, value }: Props) => {
 					<Button variant="outline" className="py-6 w-full">
 						<span
 							className={cn(
-								"font-normal",
+								"font-normal w-full text-start",
 								value ? "text-opacity-100" : "text-opacity-50",
 							)}>
 							{value ? <>{value}</> : <>Search customer</>}
@@ -55,7 +55,7 @@ const ComboBoxResponsive = React.memo(({ setValue, names, value }: Props) => {
 				<Button variant="outline" className="py-6 w-full">
 					<span
 						className={cn(
-							"font-normal",
+							"font-normal w-full text-start",
 							value ? "text-opacity-100" : "text-opacity-50",
 						)}>
 						{value ? <>{value}</> : <>Search customer</>}
