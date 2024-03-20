@@ -4,7 +4,7 @@ import { AddService } from "@/components/icons";
 import { Button } from "@/components/ui/button";
 import { AvailableTabs } from "@/constants/enums";
 import { Customer } from "@/constants/types";
-import { getCustomerNames, searchCustomerTable } from "@/endpoints";
+import { getCustomerNames } from "@/endpoints";
 import { useNavigation } from "@/hooks";
 import {
 	// ChangeEvent,
@@ -16,12 +16,13 @@ import {
 import { useNavigate } from "react-router-dom";
 import ComboBoxResponsive from "./combobox-responsive";
 import { useQuery } from "@tanstack/react-query";
+import getSearchedCustomer from "@/endpoints/get-searched-customer";
 
 export default function PointOfSalePage() {
 	const router = useNavigate();
 	const [setActive] = useNavigation((state) => [state.setActiveTab]);
 	const [search, setSearch] = useState("");
-	const [customers, setCustomers] = useState<Customer[]>([]);
+	const [customers, setCustomers] = useState<Customer>();
 
 	const { data } = useQuery({
 		queryKey: ["pos-customers-names"],
@@ -41,7 +42,7 @@ export default function PointOfSalePage() {
 	// }, []);
 
 	const handleSearchRequest = useCallback(async () => {
-		const customers = await searchCustomerTable<Customer>(search, "name");
+		const customers = await getSearchedCustomer(search); // "search" = customer name
 		setCustomers(customers);
 	}, [search]);
 
@@ -75,20 +76,20 @@ export default function PointOfSalePage() {
 					<MyInput
 						placeholder="Full Name"
 						name="fullName"
-						defaultValue={customers.length > 0 ? customers[0].fullName : ""}
+						defaultValue={customers ? customers.fullName : ""}
 						disabled
 					/>
 					<MyInput
 						placeholder="Address"
 						name="address"
 						disabled
-						defaultValue={customers.length > 0 ? customers[0].address : ""}
+						defaultValue={customers ? customers.address : ""}
 					/>
 					<MyInput
 						placeholder="Mobile Number"
 						name="mobileNumber"
 						disabled
-						defaultValue={customers.length > 0 ? customers[0].mobileNumber : ""}
+						defaultValue={customers ? customers.mobileNumber : ""}
 					/>
 				</div>
 
