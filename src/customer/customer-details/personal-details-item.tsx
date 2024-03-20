@@ -2,6 +2,7 @@ import MyInput from "@/components/custom/my-input";
 import MySelect from "@/components/custom/my-select";
 import { items } from "@/constants/objects";
 import Birthday from "./birthday";
+import { useEffect, useState } from "react";
 
 interface PersonalDetailsProps {
 	lastName: string;
@@ -20,6 +21,16 @@ export default function PersonalDetails({
 	birthday,
 	disabled,
 }: PersonalDetailsProps) {
+	const [kasarian, setKasarian] = useState("");
+
+	useEffect(() => {
+		setKasarian(gender);
+	}, [gender]);
+
+	const handleGender = (value: string) => {
+		setKasarian(value);
+	};
+
 	return (
 		<div className="space-y-4">
 			<MyInput
@@ -45,10 +56,11 @@ export default function PersonalDetails({
 				items={items}
 				name="gender"
 				placeholder="Select gender"
-				defaultValue={gender}
+				defaultValue={kasarian}
 				key={"CustomerPersonalDetails"}
 				isRequired={true}
 				isDisabled={disabled}
+				onValueChange={handleGender}
 			/>
 		</div>
 	);
