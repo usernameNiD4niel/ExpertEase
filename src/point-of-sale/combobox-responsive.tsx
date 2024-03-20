@@ -1,5 +1,3 @@
-"use client";
-
 import * as React from "react";
 
 import { useMediaQuery } from "@/hooks";
@@ -19,51 +17,26 @@ import {
 	PopoverTrigger,
 } from "@/components/ui/popover";
 
-type Status = {
+type Props = {
+	setValue: (value: string) => void;
 	value: string;
-	label: string;
+	names: string[];
 };
 
-const statuses: Status[] = [
-	{
-		value: "backlog",
-		label: "Backlog",
-	},
-	{
-		value: "todo",
-		label: "Todo",
-	},
-	{
-		value: "in progress",
-		label: "In Progress",
-	},
-	{
-		value: "done",
-		label: "Done",
-	},
-	{
-		value: "canceled",
-		label: "Canceled",
-	},
-];
-
-export default function ComboBoxResponsive() {
+const ComboBoxResponsive = React.memo(({ setValue, names, value }: Props) => {
 	const [open, setOpen] = React.useState(false);
 	const isDesktop = useMediaQuery("(min-width: 768px)");
-	const [selectedStatus, setSelectedStatus] = React.useState<Status | null>(
-		null,
-	);
 
 	if (isDesktop) {
 		return (
 			<Popover open={open} onOpenChange={setOpen}>
 				<PopoverTrigger asChild>
-					<Button variant="outline" className="w-[150px] justify-start">
-						{selectedStatus ? <>{selectedStatus.label}</> : <>+ Set status</>}
+					<Button variant="outline" className="w-full justify-start">
+						{value ? <>{value}</> : <>✔️ Tag customer</>}
 					</Button>
 				</PopoverTrigger>
-				<PopoverContent className="w-[200px] p-0" align="start">
-					<StatusList setOpen={setOpen} setSelectedStatus={setSelectedStatus} />
+				<PopoverContent className="w-full p-0" align="start">
+					<CustomerList setOpen={setOpen} setValue={setValue} names={names} />
 				</PopoverContent>
 			</Popover>
 		);
@@ -72,43 +45,47 @@ export default function ComboBoxResponsive() {
 	return (
 		<Drawer open={open} onOpenChange={setOpen}>
 			<DrawerTrigger asChild>
-				<Button variant="outline" className="w-[150px] justify-start">
-					{selectedStatus ? <>{selectedStatus.label}</> : <>+ Set status</>}
+				<Button variant="outline" className="w-full justify-start">
+					{value ? <>{value}</> : <>✔️ Tag customer</>}
 				</Button>
 			</DrawerTrigger>
 			<DrawerContent>
 				<div className="mt-4 border-t">
-					<StatusList setOpen={setOpen} setSelectedStatus={setSelectedStatus} />
+					<CustomerList setOpen={setOpen} names={names} setValue={setValue} />
 				</div>
 			</DrawerContent>
 		</Drawer>
 	);
-}
+});
 
-function StatusList({
+export default ComboBoxResponsive;
+
+function CustomerList({
 	setOpen,
-	setSelectedStatus,
+	setValue,
+	names,
 }: {
 	setOpen: (open: boolean) => void;
-	setSelectedStatus: (status: Status | null) => void;
+	setValue: (value: string) => void;
+	names: string[];
 }) {
 	return (
 		<Command>
-			<CommandInput placeholder="Filter status..." />
+			<CommandInput placeholder="Filter customer..." />
 			<CommandList>
 				<CommandEmpty>No results found.</CommandEmpty>
 				<CommandGroup>
-					{statuses.map((status) => (
+					{names.map((name) => (
 						<CommandItem
-							key={status.value}
-							value={status.value}
+							key={name}
+							value={name}
 							onSelect={(value) => {
-								setSelectedStatus(
-									statuses.find((priority) => priority.value === value) || null,
-								);
+								setValue(value);
+								console.log(`value ${value}`);
+								console.log(`name ${name}`);
 								setOpen(false);
 							}}>
-							{status.label}
+							{name}
 						</CommandItem>
 					))}
 				</CommandGroup>
