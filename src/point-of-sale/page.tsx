@@ -71,6 +71,10 @@ export default function PointOfSalePage() {
 			<form className="p-3 flex flex-col gap-y-5" onSubmit={handleFormSubmit}>
 				<h2 className="font-bold">Details</h2>
 
+				{customers.length > 0 && (
+					<pre>{JSON.stringify(customers, null, 2)}</pre>
+				)}
+
 				<div className="w-full flex flex-col gap-y-5">
 					<MyInput
 						placeholder="Full Name"

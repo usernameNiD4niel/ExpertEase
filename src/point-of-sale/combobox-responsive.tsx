@@ -16,6 +16,7 @@ import {
 	PopoverContent,
 	PopoverTrigger,
 } from "@/components/ui/popover";
+import { cn } from "@/lib/utils";
 
 type Props = {
 	setValue: (value: string) => void;
@@ -31,8 +32,14 @@ const ComboBoxResponsive = React.memo(({ setValue, names, value }: Props) => {
 		return (
 			<Popover open={open} onOpenChange={setOpen}>
 				<PopoverTrigger asChild>
-					<Button variant="outline" className="w-full justify-start">
-						{value ? <>{value}</> : <>✔️ Tag customer</>}
+					<Button variant="outline" className="py-6 w-full">
+						<span
+							className={cn(
+								"font-normal",
+								value ? "text-opacity-100" : "text-opacity-50",
+							)}>
+							{value ? <>{value}</> : <>Search customer</>}
+						</span>
 					</Button>
 				</PopoverTrigger>
 				<PopoverContent className="w-full p-0" align="start">
@@ -45,8 +52,14 @@ const ComboBoxResponsive = React.memo(({ setValue, names, value }: Props) => {
 	return (
 		<Drawer open={open} onOpenChange={setOpen}>
 			<DrawerTrigger asChild>
-				<Button variant="outline" className="w-full justify-start">
-					{value ? <>{value}</> : <>✔️ Tag customer</>}
+				<Button variant="outline" className="py-6 w-full">
+					<span
+						className={cn(
+							"font-normal",
+							value ? "text-opacity-100" : "text-opacity-50",
+						)}>
+						{value ? <>{value}</> : <>Search customer</>}
+					</span>
 				</Button>
 			</DrawerTrigger>
 			<DrawerContent>
