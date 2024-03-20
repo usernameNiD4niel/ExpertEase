@@ -40,14 +40,14 @@ export default function PointOfSalePage() {
 	// 	setSearch(e.target.value);
 	// }, []);
 
-	const handleSearchRequest = useCallback(async (search: string) => {
+	const handleSearchRequest = useCallback(async () => {
 		const customers = await searchCustomerTable<Customer>(search, "name");
 		setCustomers(customers);
-	}, []);
+	}, [search]);
 
 	useEffect(() => {
 		if (search) {
-			handleSearchRequest(search);
+			handleSearchRequest();
 		}
 		console.log(search);
 	}, [search, handleSearchRequest]);
