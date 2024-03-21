@@ -2,11 +2,7 @@ import React from "react";
 import { createRoot } from "react-dom/client";
 import App from "./App.tsx";
 import "./index.css";
-import {
-	createBrowserRouter,
-	redirect,
-	RouterProvider,
-} from "react-router-dom";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Login from "./authentication/login/page.tsx";
 import Register from "./authentication/register/page.tsx";
 import ThemeProvider from "@/components/provider/theme-provider.tsx";
@@ -21,24 +17,22 @@ import Personal from "./customer/add/personal/page.tsx";
 import CustomerDetailsItems from "./customer/customer-details/customer-details-items.tsx";
 
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { getCustomer, getCustomers, getPOSTable } from "./endpoints";
 import ModuleServices from "./point-of-sale/module/services/page.tsx";
 import Products from "./point-of-sale/products/page.tsx";
-import Cookies from "js-cookie";
 import ModuleProducts from "./point-of-sale/module/products/page.tsx";
 import CartPage from "./point-of-sale/cart/page.tsx";
+import {
+	appLoader,
+	customerManagementLoader,
+	productsLoader,
+	servicesLoader,
+} from "./constants/loader.ts";
 
 const router = createBrowserRouter([
 	{
 		path: "/",
 		element: <App />,
-		loader: async () => {
-			const token = Cookies.get("access_token_cookie");
-			if (!token) {
-				return redirect("/login");
-			}
-			return null;
-		},
+		loader: appLoader,
 		children: [
 			{
 				path: "/",
@@ -56,16 +50,12 @@ const router = createBrowserRouter([
 					{
 						path: "services",
 						element: <Services />,
-						loader: async ({ request }) => {
-							const url = request.url.split("/");
-							const customerId = url[1];
-
-							return await getPOSTable(customerId, "services");
-						},
+						loader: servicesLoader,
 					},
 					{
 						path: "products",
 						element: <Products />,
+						loader: productsLoader,
 					},
 				],
 			},
@@ -89,16 +79,10 @@ const router = createBrowserRouter([
 						path: "list",
 						index: true,
 						element: <CustomerList />,
-						loader: async () => {
-							return await getCustomers();
-						},
+						loader: customerManagementLoader,
 					},
 				],
 			},
-			// {
-			// 	path: "/customer-management/add",
-			// 	element: <AddCustomer />,
-			// },
 			{
 				path: "/customer-management/add/personal",
 				element: <Personal />,
@@ -106,16 +90,9 @@ const router = createBrowserRouter([
 			{
 				path: "/customer-management/list/:customerId",
 				element: <CustomerDetailsItems />,
-				loader: async ({ request }) => {
-					const url = request.url.split("/");
-					const customerId = url[url.length - 1];
-
-					return await getCustomer(customerId);
-				},
+				loader: customerManagementLoader,
 			},
 		],
-
-		//  loader: check if user is logged in --- if not 'redirect'
 	},
 	// Public
 	{
