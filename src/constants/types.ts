@@ -100,6 +100,13 @@ export type ServicesType = {
 	next_page: number | null;
 };
 
+export type ProductsType = {
+	products: Products[];
+	page_count: number;
+	previous_page: number | null;
+	next_page: number | null;
+};
+
 export type Services = {
 	id: string;
 	service: string;

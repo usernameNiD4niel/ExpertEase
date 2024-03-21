@@ -5,20 +5,19 @@ import ListTable from "./table-data";
 // import { useQuery } from "@tanstack/react-query";
 // import getServices from "@/endpoints/get-services";
 import MyCart from "@/components/custom/my-cart";
-import { productsItems } from "@/constants/objects";
+import { ProductsType } from "@/constants/types";
+import { useLoaderData } from "react-router-dom";
 
 export default function Products() {
-	// const { data } = useQuery({
-	// 	queryKey: ["services", "table", "pos"],
-	// 	queryFn: getServices,
-	// });
+	const products = useLoaderData() as ProductsType;
+
 	return (
 		<div className="p-4 md:p-10 pt-4">
 			<POSTabMutator tab={POSTab.Product} />
 			<TabMutator currentTab={AvailableTabs["Point of Sale"]} />
 
 			{/* <ServiceTable /> */}
-			<ListTable data={productsItems} />
+			<ListTable data={products.products} />
 
 			<MyCart />
 		</div>
