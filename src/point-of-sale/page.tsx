@@ -16,7 +16,7 @@ import {
 import { useNavigate } from "react-router-dom";
 import ComboBoxResponsive from "./combobox-responsive";
 import { useQuery } from "@tanstack/react-query";
-import getSearchedCustomer from "@/endpoints/get-searched-customer";
+import { getSearchedCustomer } from "@/endpoints";
 
 export default function PointOfSalePage() {
 	const router = useNavigate();

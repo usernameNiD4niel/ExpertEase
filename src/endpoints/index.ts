@@ -7,6 +7,9 @@ import deleteCustomer from "./delete-customer";
 import searchCustomerTable from "./search-customer-table";
 import searchPOSServicesTable from "./search-pos-services-table";
 import getCustomerNames from "./get-customer-names";
+import getSearchedCustomer from "./get-searched-customer";
+import getPOSTable from "./get-pos-table";
+import getCustomer from "./get-customer";
 
 export {
 	register,
@@ -18,4 +21,7 @@ export {
 	searchCustomerTable,
 	searchPOSServicesTable,
 	getCustomerNames,
+	getSearchedCustomer,
+	getPOSTable,
+	getCustomer,
 };

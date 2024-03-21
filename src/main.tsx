@@ -21,8 +21,7 @@ import Personal from "./customer/add/personal/page.tsx";
 import CustomerDetailsItems from "./customer/customer-details/customer-details-items.tsx";
 
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import getCustomers from "./endpoints/get-customers.ts";
-import getCustomer from "./endpoints/get-customer.ts";
+import { getCustomer, getCustomers, getPOSTable } from "./endpoints";
 import ModuleServices from "./point-of-sale/module/services/page.tsx";
 import Products from "./point-of-sale/products/page.tsx";
 import Cookies from "js-cookie";
@@ -51,12 +50,18 @@ const router = createBrowserRouter([
 				element: <PointOfSalePage />,
 			},
 			{
-				path: "/point-of-sale/module",
+				path: "/point-of-sale/:customerId",
 				element: <Module />,
 				children: [
 					{
 						path: "services",
 						element: <Services />,
+						loader: async ({ request }) => {
+							const url = request.url.split("/");
+							const customerId = url[1];
+
+							return await getPOSTable(customerId, "services");
+						},
 					},
 					{
 						path: "products",
