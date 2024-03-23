@@ -139,6 +139,11 @@ export type ProductsManagement = {
 	price: string;
 };
 
+export type SupplierType = {
+	text: string;
+	placeholder: string;
+};
+
 export type DropdownItem = {
 	text: string | JSX.Element;
 	action?: () => void;

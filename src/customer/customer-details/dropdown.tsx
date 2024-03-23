@@ -31,6 +31,7 @@ const CustomerDetailsDropdown = memo(
 					{items.map((item) => (
 						<DropdownMenuItem
 							onClick={item.action}
+							key={item.text}
 							className="flex items-center gap-2 hover:cursor-pointer">
 							{item.Icon && <item.Icon className="mt-[0.20rem]" />}
 							{item.text}

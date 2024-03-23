@@ -1,3 +1,4 @@
+import { memo } from "react";
 import { IoIosArrowBack } from "react-icons/io";
 import { useNavigate } from "react-router-dom";
 
@@ -5,7 +6,7 @@ interface HeaderWithBackProps {
 	text: string;
 }
 
-export default function HeaderWithBack({ text }: HeaderWithBackProps) {
+const HeaderWithBack = memo(({ text }: HeaderWithBackProps) => {
 	const router = useNavigate();
 
 	function handleBackClick() {
@@ -22,4 +23,6 @@ export default function HeaderWithBack({ text }: HeaderWithBackProps) {
 			</button>
 		</div>
 	);
-}
+});
+
+export default HeaderWithBack;

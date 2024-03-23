@@ -24,7 +24,8 @@ export default function MyTab({ tabs, className }: Props) {
 						tab === tab_.matcher
 							? "font-bold text-white border-b-4 border-white"
 							: "text-slate-400 font-normal",
-					)}>
+					)}
+					key={tab_.to}>
 					{tab_.text}
 				</Link>
 			))}

@@ -30,6 +30,7 @@ import {
 import ManagementPage from "./management/page.tsx";
 import ProductsPage from "./management/products/page.tsx";
 import ManagementServices from "./management/services/page.tsx";
+import ProductItem from "./management/products/product-item.tsx";
 
 const router = createBrowserRouter([
 	{
@@ -102,6 +103,12 @@ const router = createBrowserRouter([
 					{
 						path: "products",
 						element: <ProductsPage />,
+						children: [
+							{
+								path: "add",
+								element: <ProductItem />,
+							},
+						],
 					},
 					{
 						path: "services",
