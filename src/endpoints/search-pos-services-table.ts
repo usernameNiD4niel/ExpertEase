@@ -9,7 +9,7 @@ export default async function searchPOSServicesTable<TData>(
 	const response = await fetch(
 		`${
 			import.meta.env.VITE_BACKEND_URL
-		}/api/pos/${property}/search?query=${searchQuery}`,
+		}/api/pos/${property}/search?query=${searchQuery}`, //! fix this, use the notepad to fix this
 		{
 			headers: {
 				"Content-Type": "application/json",

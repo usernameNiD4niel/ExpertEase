@@ -27,12 +27,15 @@ import {
 	productsLoader,
 	servicesLoader,
 } from "./constants/loader.ts";
+import ManagementPage from "./management/page.tsx";
+import ProductsPage from "./management/products/page.tsx";
+import ManagementServices from "./management/services/page.tsx";
 
 const router = createBrowserRouter([
 	{
 		path: "/",
 		element: <App />,
-		loader: appLoader,
+		// loader: appLoader,
 		children: [
 			{
 				path: "/",
@@ -91,6 +94,20 @@ const router = createBrowserRouter([
 				path: "/customer-management/list/:customerId",
 				element: <CustomerDetailsItems />,
 				loader: customerManagementLoader,
+			},
+			{
+				path: "management",
+				element: <ManagementPage />,
+				children: [
+					{
+						path: "products",
+						element: <ProductsPage />,
+					},
+					{
+						path: "services",
+						element: <ManagementServices />,
+					},
+				],
 			},
 		],
 	},

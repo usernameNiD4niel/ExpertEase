@@ -107,6 +107,12 @@ export type ProductsType = {
 	next_page: number | null;
 };
 
+export type TabType = {
+	text: string;
+	to: string;
+	matcher: string; // eg. /products = products OR /services = services
+};
+
 export type Services = {
 	id: string;
 	service: string;
