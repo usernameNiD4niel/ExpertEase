@@ -1,4 +1,10 @@
-import { CartProps, Products, SelectType, Services } from "./types";
+import {
+	CartProps,
+	Products,
+	ProductsManagement,
+	SelectType,
+	Services,
+} from "./types";
 
 const items: SelectType[] = [
 	{
@@ -80,6 +86,31 @@ const productsItems: Products[] = [
 ];
 
 // ! Delete this
+const productsManagement: ProductsManagement[] = [
+	{
+		description: "Just a regular check-up",
+		id: "1",
+		price: "100.00",
+		category: "Variant/Size/Dimension",
+		product: "Coca-cola",
+	},
+	{
+		description: "Check-up with laboratory analysis",
+		id: "2",
+		price: "100.00",
+		category: "Variant/Size/Dimension",
+		product: "Amino Acid Tablet",
+	},
+	{
+		description: "Overnight stay-in",
+		id: "3",
+		price: "500.00",
+		category: "Variant/Size/Dimension",
+		product: "Royal",
+	},
+];
+
+// ! Delete this
 const orderSummary: CartProps[] = [
 	{
 		price: "45",
@@ -103,4 +134,10 @@ const orderSummary: CartProps[] = [
 	},
 ];
 
-export { items, servicesItems, productsItems, orderSummary };
+export {
+	items,
+	servicesItems,
+	productsItems,
+	orderSummary,
+	productsManagement,
+};

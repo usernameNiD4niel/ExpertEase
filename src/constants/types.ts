@@ -131,6 +131,14 @@ export type Products = {
 	discount: string;
 };
 
+export type ProductsManagement = {
+	id: string;
+	product: string;
+	description: string;
+	category: string; // variant, size and dimensions
+	price: string;
+};
+
 export type DropdownItem = {
 	text: string | JSX.Element;
 	action?: () => void;

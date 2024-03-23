@@ -19,7 +19,7 @@ const column: ColumnDef<Products>[] = [
 					<span className="md:hidden">{row.getValue("category")}</span>
 					{discount !== "0" && (
 						<span className="md:hidden text-red-500 line-through">
-							₱{discount as string}.00
+							₱{discount as string}
 						</span>
 					)}
 				</div>
@@ -51,7 +51,7 @@ const column: ColumnDef<Products>[] = [
 				<div className="flex space-x-1 items-center">
 					{discount !== "0" && (
 						<span className="text-red-500 line-through text-sm hidden md:flex">
-							₱{discount as string}.00
+							₱{discount as string}
 						</span>
 					)}
 					<span className="font-semibold">{row.getValue("price")}</span>
