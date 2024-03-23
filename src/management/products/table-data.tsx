@@ -99,11 +99,11 @@ export default function ListTable({ data }: ListTableProps) {
 				/>
 				<Link
 					to={"/management/products/add"}
-					className="p-2 bg-transparent flex items-center justify-center gap-2 text-[#284B63] dark:text-slate-400">
-					<span className="mt-[3px]">
+					className="p-2 pt-4 bg-transparent flex items-center justify-center gap-2 text-[#284B63]">
+					<span>
 						<AddService />
 					</span>
-					<span className="text-sm">ADD PRODUCTS</span>
+					<span className="text-xs md:text-sm">ADD PRODUCTS</span>
 				</Link>
 			</div>
 			<div className="rounded-md border">

@@ -12,7 +12,7 @@ const column: ColumnDef<ProductsManagement>[] = [
 		cell: ({ row }) => {
 			return (
 				<div className="md:ml-6 flex flex-col">
-					<span className="font-semibold md:font-normal text-base md:text-sm">
+					<span className="font-semibold md:font-normal text-base md:text-sm text-slate-600 md:text-black">
 						{row.getValue("product")}
 					</span>
 					<span className="md:hidden text-sm">
@@ -37,7 +37,7 @@ const column: ColumnDef<ProductsManagement>[] = [
 		cell: ({ row }) => {
 			return (
 				<div className="flex space-x-1 items-center">
-					<span className="font-semibold md:font-normal">
+					<span className="font-semibold md:font-normal text-slate-600 md:text-black">
 						₱{row.getValue("price")}
 					</span>
 				</div>
