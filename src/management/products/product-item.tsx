@@ -12,6 +12,7 @@ import Product from "./product";
 import Pricing from "./pricing";
 import Supplier from "./supplier";
 import Discount from "./discount";
+import Taxes from "./taxes";
 
 type RouteParams = {
 	productId: string;
@@ -79,11 +80,13 @@ export default function ProductItem() {
 	}
 	return (
 		<>
-			<section className="absolute top-0 left-0 flex items-center flex-col md:left-[320px] right-0 bottom-0 bg-white z-50">
-				<HeaderWithBack text="Add Product" />
+			<section className="absolute top-0 left-0 flex items-center flex-col md:left-[320px] right-0 bg-white z-50">
+				<div className="fixed top-0 left-0 md:left-[320px] w-full">
+					<HeaderWithBack text="Add Product" />
+				</div>
 
 				<form
-					className="w-full max-w-screen-md p-4 space-y-2"
+					className="w-full max-w-screen-md p-4 space-y-2 pt-20"
 					onSubmit={handleFormSubmit}>
 					{/* Header */}
 					<div className="w-full flex items-center justify-between">
@@ -106,6 +109,9 @@ export default function ProductItem() {
 
 					{/* Discount fields */}
 					<Discount isEditable={isEditable} />
+
+					{/* Taxes fields */}
+					<Taxes isEditable={isEditable} />
 
 					<button>Submit</button>
 				</form>

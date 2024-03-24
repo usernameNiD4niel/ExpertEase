@@ -16,7 +16,7 @@ const Discount = memo(({ isEditable }: Props) => {
 					className="w-full pe-9"
 					disabled={isEditable}
 				/>
-				<p className="w-5 h-5 absolute right-1 top-[.32rem]">%</p>
+				<p className="w-5 h-5 absolute right-1 top-[.40rem]">%</p>
 			</div>
 		</div>
 	);
