@@ -11,6 +11,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import Product from "./product";
 import Pricing from "./pricing";
 import Supplier from "./supplier";
+import Discount from "./discount";
 
 type RouteParams = {
 	productId: string;
@@ -102,6 +103,9 @@ export default function ProductItem() {
 
 					{/* Supplier fields */}
 					<Supplier isEditable={isEditable} />
+
+					{/* Discount fields */}
+					<Discount isEditable={isEditable} />
 
 					<button>Submit</button>
 				</form>
