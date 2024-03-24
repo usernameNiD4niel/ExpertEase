@@ -106,13 +106,13 @@ export default function NextMenu() {
 							/>
 							<SheetCloseComp
 								text="Product Management"
-								to="/product-management"
+								to="/management/products"
 								availableTabs={AvailableTabs["Product Management"]}
 							/>
 							<SheetCloseComp
 								text="Service Management"
-								to="/service-management"
-								availableTabs={AvailableTabs["Product Management"]}
+								to="/management/services"
+								availableTabs={AvailableTabs["Service Management"]}
 							/>
 							<SheetCloseComp
 								text="Attendance Management"
