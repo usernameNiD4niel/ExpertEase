@@ -21,12 +21,12 @@ const navigationText: NavigationMenu[] = [
 	},
 	{
 		label: "Product Management",
-		link: "/product-management",
+		link: "/management/products",
 		tab: AvailableTabs["Product Management"],
 	},
 	{
 		label: "Service Management",
-		link: "/service-management",
+		link: "/management/services",
 		tab: AvailableTabs["Service Management"],
 	},
 	{
