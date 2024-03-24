@@ -23,6 +23,7 @@ import ModuleProducts from "./point-of-sale/module/products/page.tsx";
 import CartPage from "./point-of-sale/cart/page.tsx";
 import {
 	appLoader,
+	customerManagementListLoader,
 	customerManagementLoader,
 	productsLoader,
 	servicesLoader,
@@ -94,7 +95,7 @@ const router = createBrowserRouter([
 			{
 				path: "/customer-management/list/:customerId",
 				element: <CustomerDetailsItems />,
-				loader: customerManagementLoader,
+				loader: customerManagementListLoader,
 			},
 			{
 				path: "management",
