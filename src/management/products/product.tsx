@@ -13,7 +13,13 @@ const Product = memo(({ isEditable }: Props) => {
 				<label htmlFor="name" className="text-sm">
 					Name
 				</label>
-				<Input className="py-5" name="name" disabled={isEditable} id="name" />
+				<Input
+					className="py-5"
+					name="name"
+					required
+					disabled={!isEditable}
+					id="name"
+				/>
 			</div>
 			<div className="space-y-1">
 				<label className="text-sm" htmlFor="description">
@@ -23,7 +29,8 @@ const Product = memo(({ isEditable }: Props) => {
 					className="py-5"
 					name="description"
 					id="description"
-					disabled={isEditable}
+					required
+					disabled={!isEditable}
 				/>
 			</div>
 			<div className="space-y-1">
@@ -34,7 +41,7 @@ const Product = memo(({ isEditable }: Props) => {
 					list={["Soft drinks", "Ketchup", "Rice"]}
 					placeholder=""
 					commandPlaceholder="Choose a category"
-					disabled={isEditable}
+					disabled={!isEditable}
 					name="category"
 				/>
 			</div>
@@ -46,7 +53,8 @@ const Product = memo(({ isEditable }: Props) => {
 					className="py-5"
 					name="variant"
 					id="variant"
-					disabled={isEditable}
+					required
+					disabled={!isEditable}
 				/>
 			</div>
 		</div>

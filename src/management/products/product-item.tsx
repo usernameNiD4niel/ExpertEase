@@ -3,16 +3,17 @@ import MyModal from "@/components/custom/my-modal";
 import { displayMessage } from "@/constants/helper-function";
 import { DropdownItem } from "@/constants/types";
 import CustomerDetailsDropdown from "@/customer/customer-details/dropdown";
-import { useCallback, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import { FiEdit } from "react-icons/fi";
 import { IoChevronDownOutline } from "react-icons/io5";
 import { TfiTrash } from "react-icons/tfi";
-import { useNavigate, useParams } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 import Product from "./product";
 import Pricing from "./pricing";
 import Supplier from "./supplier";
 import Discount from "./discount";
 import Taxes from "./taxes";
+import { Button } from "@/components/ui/button";
 
 type RouteParams = {
 	productId: string;
@@ -21,6 +22,22 @@ type RouteParams = {
 export default function ProductItem() {
 	const [isDeleting, setIsDeleting] = useState(false);
 	const [isEditable, setIsEditable] = useState(false);
+
+	const location = useLocation();
+
+	const pathname = useMemo(() => {
+		const path = location.pathname;
+		const splittedPath = path.split("/");
+		const end = splittedPath[splittedPath.length - 1];
+
+		return end;
+	}, [location]);
+
+	useEffect(() => {
+		if (pathname === "add") {
+			setIsEditable(true);
+		}
+	}, [pathname]);
 
 	const { productId } = useParams<RouteParams>();
 	const router = useNavigate();
@@ -82,20 +99,24 @@ export default function ProductItem() {
 		<>
 			<section className="absolute top-0 left-0 flex items-center flex-col md:left-[320px] right-0 bg-white z-50">
 				<div className="fixed top-0 left-0 md:left-[320px] w-full">
-					<HeaderWithBack text="Add Product" />
+					<HeaderWithBack
+						text={pathname === "add" ? "Add Product" : "Update Product"}
+					/>
 				</div>
 
 				<form
-					className="w-full max-w-screen-md p-4 space-y-2 pt-20"
+					className="w-full max-w-screen-md p-4 space-y-2 pt-20 -z-10"
 					onSubmit={handleFormSubmit}>
 					{/* Header */}
 					<div className="w-full flex items-center justify-between">
 						<h3 className="font-semibold">Product</h3>
-						<CustomerDetailsDropdown
-							triggerText="Options"
-							TriggerIcon={IoChevronDownOutline}
-							items={items}
-						/>
+						{pathname !== "add" && (
+							<CustomerDetailsDropdown
+								triggerText="Options"
+								TriggerIcon={IoChevronDownOutline}
+								items={items}
+							/>
+						)}
 					</div>
 
 					{/* Products fields */}
@@ -113,7 +134,11 @@ export default function ProductItem() {
 					{/* Taxes fields */}
 					<Taxes isEditable={isEditable} />
 
-					<button>Submit</button>
+					<div className="w-full flex justify-end items-center py-4">
+						<Button size={"lg"}>
+							{pathname === "add" ? "Create Product" : "Update Product"}
+						</Button>
+					</div>
 				</form>
 			</section>
 			{/* This will be shown when the user clicks the delete button */}

@@ -67,7 +67,7 @@ const Supplier = memo(({ isEditable }: Props) => {
 				<label htmlFor="address" className="text-sm">
 					Address
 				</label>
-				<Input name="address" id="address" disabled={isEditable} />
+				<Input name="address" id="address" disabled={!isEditable} required />
 			</div>
 		</div>
 	);

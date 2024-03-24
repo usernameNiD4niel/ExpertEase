@@ -19,7 +19,7 @@ const Pricing = memo(({ isEditable }: Props) => {
 					list={["Piece", "Box", "Bundle", "KG", "Meters", "Liter"]}
 					placeholder=""
 					commandPlaceholder="Choose a unit"
-					disabled={isEditable}
+					disabled={!isEditable}
 					name="unit"
 				/>
 			</div>
@@ -31,7 +31,8 @@ const Pricing = memo(({ isEditable }: Props) => {
 					className="py-5"
 					id="price_per_unit"
 					name="price_per_unit"
-					disabled={isEditable}
+					required
+					disabled={!isEditable}
 				/>
 			</div>
 			<div className="space-y-1">
@@ -42,7 +43,8 @@ const Pricing = memo(({ isEditable }: Props) => {
 					className="py-5"
 					name="cost_per_unit"
 					id="cost_per_unit"
-					disabled={isEditable}
+					required
+					disabled={!isEditable}
 				/>
 			</div>
 			<div className="space-y-1">
@@ -52,8 +54,9 @@ const Pricing = memo(({ isEditable }: Props) => {
 				<Input
 					className="py-5"
 					id="gross_margin"
+					required
 					name="gross_margin"
-					disabled={isEditable}
+					disabled={!isEditable}
 				/>
 			</div>
 		</div>

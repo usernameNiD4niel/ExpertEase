@@ -18,7 +18,7 @@ const Taxes = memo(({ isEditable }: Props) => {
 						VAT will be deducted from final price assigned above
 					</p>
 				</label>
-				<Switch id="vat" name="vat" disabled={isEditable} />
+				<Switch id="vat" name="vat" disabled={!isEditable} required />
 			</div>
 
 			<div className="w-full flex justify-end items-center">
