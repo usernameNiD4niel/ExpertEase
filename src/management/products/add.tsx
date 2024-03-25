@@ -3,14 +3,16 @@ import { AddService } from "@/components/icons";
 import { Button } from "@/components/ui/button";
 import { DialogClose } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
+import { cn } from "@/lib/utils";
 import React, { memo, useCallback, useState } from "react";
 import { toast } from "sonner";
 
 type Props = {
 	setSuppliers: React.Dispatch<React.SetStateAction<string[]>>;
+	isEditable: boolean;
 };
 
-const Add = memo(({ setSuppliers }: Props) => {
+const Add = memo(({ setSuppliers, isEditable }: Props) => {
 	const [supplier, setSupplier] = useState("");
 
 	const handleAddSupplier = useCallback(() => {
@@ -27,7 +29,11 @@ const Add = memo(({ setSuppliers }: Props) => {
 			<MyDismissableDialog
 				triggerChild={
 					<button
-						className="text-blue-500 flex items-center gap-x-2 text-sm mt-2"
+						className={cn(
+							"text-blue-500 flex items-center gap-x-2 text-sm mt-2",
+							isEditable ? "cursor-pointer" : "cursor-not-allowed",
+						)}
+						disabled={!isEditable}
 						// onClick={handleAddSupplier}
 						type="button">
 						<AddService className="text-lg mt-1" />

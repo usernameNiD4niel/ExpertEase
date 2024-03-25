@@ -1,5 +1,6 @@
 import { AddService } from "@/components/icons";
 import { Switch } from "@/components/ui/switch";
+import { cn } from "@/lib/utils";
 import { memo } from "react";
 
 type Props = {
@@ -23,7 +24,11 @@ const Taxes = memo(({ isEditable }: Props) => {
 
 			<div className="w-full flex justify-end items-center">
 				<button
-					className="text-blue-500 flex items-center gap-x-2 text-sm mt-2 py-3"
+					className={cn(
+						"text-blue-500 flex items-center gap-x-2 text-sm mt-2 py-3",
+						isEditable ? "cursor-pointer" : "cursor-not-allowed",
+					)}
+					disabled={!isEditable}
 					type="button">
 					<AddService className="text-lg mt-1" />
 					<span>ADD OTHER TAX</span>

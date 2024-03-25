@@ -61,7 +61,7 @@ const Supplier = memo(({ isEditable }: Props) => {
 				</div>
 			)}
 
-			<Add setSuppliers={setSuppliers} />
+			<Add setSuppliers={setSuppliers} isEditable={isEditable} />
 
 			<div className="space-y-1">
 				<label htmlFor="address" className="text-sm">

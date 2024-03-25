@@ -87,13 +87,9 @@ export default function ProductItem() {
 
 		const suppliers = formData.getAll("supplier");
 
-		console.log("mapping supplier");
-
 		suppliers.forEach((supplier) => {
 			console.log(supplier.toString());
 		});
-
-		console.log("done mapping supplier");
 	}
 	return (
 		<>
@@ -134,11 +130,13 @@ export default function ProductItem() {
 					{/* Taxes fields */}
 					<Taxes isEditable={isEditable} />
 
-					<div className="w-full flex justify-end items-center py-4">
-						<Button size={"lg"}>
-							{pathname === "add" ? "Create Product" : "Update Product"}
-						</Button>
-					</div>
+					{isEditable && (
+						<div className="w-full flex justify-end items-center py-4">
+							<Button size={"lg"}>
+								{pathname === "add" ? "Create Product" : "Update Product"}
+							</Button>
+						</div>
+					)}
 				</form>
 			</section>
 			{/* This will be shown when the user clicks the delete button */}

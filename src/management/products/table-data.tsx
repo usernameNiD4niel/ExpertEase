@@ -15,9 +15,8 @@ import {
 	useReactTable,
 } from "@tanstack/react-table";
 import { useCallback, useEffect, useLayoutEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import MyInput from "@/components/custom/my-input";
-import { AddService } from "@/components/icons";
 import column from "./column";
 
 interface ListTableProps {
@@ -94,17 +93,9 @@ export default function ListTable({ data }: ListTableProps) {
 					placeholder="Search Products"
 					value={search}
 					onChange={handleOnChange}
-					className="w-full py-6"
+					className="w-full py-6 border-slate-300"
 					name=""
 				/>
-				<Link
-					to={"/management/products/add"}
-					className="p-2 pt-4 bg-transparent flex items-center justify-center gap-2 text-[#284B63]">
-					<span>
-						<AddService />
-					</span>
-					<span className="text-xs md:text-sm">ADD PRODUCTS</span>
-				</Link>
 			</div>
 			<div className="rounded-md border">
 				<Table>
