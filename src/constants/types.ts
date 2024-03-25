@@ -139,6 +139,15 @@ export type ProductsManagement = {
 	price: string;
 };
 
+export type ServicesManagement = {
+	id: string;
+	services: string;
+	description: string;
+	unit: string;
+	price: string;
+	provider: string; // true or false
+};
+
 export type SupplierType = {
 	text: string;
 	placeholder: string;

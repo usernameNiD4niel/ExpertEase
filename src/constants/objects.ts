@@ -4,6 +4,7 @@ import {
 	ProductsManagement,
 	SelectType,
 	Services,
+	ServicesManagement,
 } from "./types";
 
 const items: SelectType[] = [
@@ -110,6 +111,33 @@ const productsManagement: ProductsManagement[] = [
 	},
 ];
 
+const servicesManagement: ServicesManagement[] = [
+	{
+		id: "1",
+		description: "AAAAA",
+		price: "100.00",
+		provider: "true",
+		services: "Regular Checkup",
+		unit: "Session",
+	},
+	{
+		id: "2",
+		description: "BBBBB",
+		price: "1250.00",
+		provider: "false",
+		services: "Laboratory",
+		unit: "Month",
+	},
+	{
+		id: "3",
+		description: "CCCCCC",
+		price: "500.00",
+		provider: "true",
+		services: "Misc.",
+		unit: "Month",
+	},
+];
+
 // ! Delete this
 const orderSummary: CartProps[] = [
 	{
@@ -140,4 +168,5 @@ export {
 	productsItems,
 	orderSummary,
 	productsManagement,
+	servicesManagement,
 };
