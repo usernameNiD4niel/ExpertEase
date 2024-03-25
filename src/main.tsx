@@ -32,12 +32,13 @@ import ManagementPage from "./management/page.tsx";
 import ProductsPage from "./management/products/page.tsx";
 import ManagementServices from "./management/services/page.tsx";
 import ProductItem from "./management/products/product-item.tsx";
+import ServiceItem from "./management/services/service-item.tsx";
 
 const router = createBrowserRouter([
 	{
 		path: "/",
 		element: <App />,
-		// loader: appLoader,
+		loader: appLoader,
 		children: [
 			{
 				path: "/",
@@ -118,6 +119,16 @@ const router = createBrowserRouter([
 					{
 						path: "services",
 						element: <ManagementServices />,
+						children: [
+							{
+								path: "add",
+								element: <ServiceItem />,
+							},
+							{
+								path: ":serviceId",
+								element: <ServiceItem />,
+							},
+						],
 					},
 				],
 			},
